@@ -8,7 +8,7 @@ namespace Wordschatz.Domain.Models
     /// <summary>
     /// A mark class.
     /// </summary>
-    public class Mark : Entity
+    public class Mark : EventSourcedAggregate
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -5,7 +5,7 @@ using Wordschatz.Common.Entities;
 
 namespace Wordschatz.Domain.Models
 {
-    public class Word : Entity
+    public class Word : EventSourcedAggregate
     {
         public string Term { get; set; }
         public string Meaning { get; set; }

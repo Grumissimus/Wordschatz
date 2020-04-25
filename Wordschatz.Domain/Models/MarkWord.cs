@@ -9,9 +9,9 @@ namespace Wordschatz.Domain.Models
     /// </summary>
     public class MarkWord
     {
-        public int MarkId { get; set; }
+        public ulong MarkId { get; set; }
         public virtual Mark Mark { get; set; }
-        public int WordId { get; set; }
+        public ulong WordId { get; set; }
         public virtual Word Word { get; set; }
     }
 }

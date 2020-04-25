@@ -7,9 +7,9 @@ namespace Wordschatz.Domain.Models
 {
     public class WordTheme
     {
-        public int WordId { get; set; }
+        public ulong WordId { get; set; }
         public virtual Word Word { get; set; }
-        public int ThemeId { get; set; }
+        public ulong ThemeId { get; set; }
         public virtual Theme Theme { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Wordschatz.Common.Entities;
+using Wordschatz.Domain.Models.Dictionaries;
 
 namespace Wordschatz.Domain.Models
 {
@@ -13,7 +14,12 @@ namespace Wordschatz.Domain.Models
         public ulong? ParentId { get; set; }
         public virtual Theme Parent { get; set; }
 
-        public virtual List<WordTheme> Words { get; set; }
+        public virtual List<Word> Words { get; set; }
         public virtual List<MarkTheme> Marks { get; set; }
+
+        public Theme()
+        {
+
+        }
     }
 }

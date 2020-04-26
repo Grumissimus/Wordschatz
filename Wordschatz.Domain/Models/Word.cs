@@ -10,7 +10,13 @@ namespace Wordschatz.Domain.Models
         public string Term { get; set; }
         public string Meaning { get; set; }
 
-        public virtual List<WordTheme> Themes { get; set; }
+        public ulong ThemeId { get; set; }
+        public virtual Theme Theme { get; set; }
         public virtual List<MarkWord> Marks { get; set; }
+
+        public Word()
+        {
+
+        }
     }
 }

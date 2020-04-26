@@ -14,5 +14,10 @@ namespace Wordschatz.Domain.Models
         public string Description { get; set; }
 
         public virtual List<MarkWord> Words { get; set; }
+
+        public Mark()
+        {
+
+        }
     }
 }

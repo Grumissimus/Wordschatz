@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wordschatz.Domain.Models
+namespace Wordschatz.Domain.Models.Dictionaries
 {
-    public enum DictionaryAccess
+    public enum Visibility
     {
-        Public,
+        Private,
         NonPublic,
         PasswordProtected,
-        Private
+        Public
     }
 }

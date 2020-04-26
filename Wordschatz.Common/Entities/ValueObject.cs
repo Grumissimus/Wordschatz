@@ -34,8 +34,15 @@ namespace Wordschatz.Common.Entities
         }
         public static bool operator ==(ValueObject a, ValueObject b)
         {
-            return a is null && b is null ? a.Equals(b) : false;
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+                return true;
+
+            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+                return false;
+
+            return a.Equals(b);
         }
+
         public static bool operator !=(ValueObject a, ValueObject b)
         {
             return !(a == b);

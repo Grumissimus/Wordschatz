@@ -15,25 +15,25 @@ namespace Wordschatz.Domain.Tests
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfUserTriesToBuildWithoutSetName()
+        public void DictionaryBuilder_ThrowsArgumentException_IfUserTriesToBuildWithoutSetName()
         {
             Assert.Throws<ArgumentNullException>( () => builder.Build() );
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfTheNameIsNull()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsNull()
         {
             Assert.Throws<ArgumentException>(() => builder.SetName(null));
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfTheNameIsEmpty()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsEmpty()
         {
             Assert.Throws<ArgumentException>(() => builder.SetName(""));
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfTheNameIsLongerThenMaximumAmountOfCharacter()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsLongerThenMaximumAmountOfCharacter()
         {
             Assert.Throws<ArgumentException>(
                 () => builder.SetName(new string('*', DictionaryName.MaximumLength + 1) )
@@ -41,7 +41,7 @@ namespace Wordschatz.Domain.Tests
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfTheDescriptionIsNull()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheDescriptionIsNull()
         {
             Assert.Throws<ArgumentException>(
                 () => builder.SetDescription(null)
@@ -49,10 +49,18 @@ namespace Wordschatz.Domain.Tests
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentExceptionIfTheDescriptionIsLongerThanMaximumAmoungOfCharacter()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheDescriptionIsLongerThanMaximumAmountOfCharacter()
         {
             Assert.Throws<ArgumentException>(
                 () => builder.SetDescription(new string('*', DictionaryDescription.MaximumLength + 1))
+            );
+        }
+
+        [Test]
+        public void DictionaryBuilder_ThrowsArgumentNullException_IfTheThemeIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => builder.AddTheme(null)
             );
         }
     }

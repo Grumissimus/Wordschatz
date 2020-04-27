@@ -10,7 +10,7 @@ namespace Wordschatz.Common.Entities
     // The code comes from: https://enterprisecraftsmanship.com/posts/entity-base-class/
     public abstract class Entity
     {
-        public virtual ulong Id { get; protected set; }
+        public ulong Id { get; protected set; }
         protected virtual object Actual => this;
 
         public override bool Equals(object obj)

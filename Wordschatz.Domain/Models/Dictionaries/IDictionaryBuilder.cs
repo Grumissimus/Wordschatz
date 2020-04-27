@@ -6,12 +6,13 @@ namespace Wordschatz.Domain.Models.Dictionaries
 {
     public interface IDictionaryBuilder
     {
+        IDictionaryBuilder SetId(ulong id);
         IDictionaryBuilder SetName(string name);
         IDictionaryBuilder SetDescription(string description);
         IDictionaryBuilder SetVisibility(Visibility visibility);
         IDictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel);
         IDictionaryBuilder AddTheme(Theme theme);
-        IDictionaryBuilder AddTag(string tag);
+        IDictionaryBuilder AddTag(Tag tag);
         Dictionary Build();
     }
 }

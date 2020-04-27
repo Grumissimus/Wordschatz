@@ -25,7 +25,8 @@ namespace Wordschatz.Common.Entities
 
         public void LoadsFromHistory(IEnumerable<IEvent> history)
         {
-            foreach (var e in history) ApplyChange(e, false);
+            foreach (var e in history) 
+                ApplyChange(e, false);
         }
 
         protected void ApplyChange(IEvent @event)

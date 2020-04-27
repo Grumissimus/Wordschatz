@@ -1,67 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using NUnit.Framework;
-using System;
-using Wordschatz.Domain.Models.Dictionaries;
 
-namespace Wordschatz.Domain.Tests
+namespace Wordschatz.Domain.Tests.DictionaryTests
 {
-    public class Tests
+    class DictionaryTests
     {
-        DictionaryBuilder builder;
-
         [SetUp]
         public void Setup()
         {
-            builder = new DictionaryBuilder();
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfUserTriesToBuildWithoutSetName()
+        public void Dictionary()
         {
-            Assert.Throws<ArgumentNullException>( () => builder.Build() );
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsNull()
-        {
-            Assert.Throws<ArgumentException>(() => builder.SetName(null));
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsEmpty()
-        {
-            Assert.Throws<ArgumentException>(() => builder.SetName(""));
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsLongerThenMaximumAmountOfCharacter()
-        {
-            Assert.Throws<ArgumentException>(
-                () => builder.SetName(new string('*', DictionaryName.MaximumLength + 1) )
-            );
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfTheDescriptionIsNull()
-        {
-            Assert.Throws<ArgumentException>(
-                () => builder.SetDescription(null)
-            );
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfTheDescriptionIsLongerThanMaximumAmountOfCharacter()
-        {
-            Assert.Throws<ArgumentException>(
-                () => builder.SetDescription(new string('*', DictionaryDescription.MaximumLength + 1))
-            );
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentNullException_IfTheThemeIsNull()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => builder.AddTheme(null)
-            );
+            Assert.Pass();
         }
     }
 }

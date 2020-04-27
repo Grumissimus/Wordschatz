@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Wordschatz.Common.Entities;
+using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.Domain.Models.Dictionaries
 {
     public class Dictionary : EventSourcedAggregate, IDictionary
     {
-        public Name Name { get; set; }
-        public Description Description { get; set; }
-        public Visibility Visibility { get; set; }
-        public EditPermission EditPermission { get; set; }
-        public virtual List<Tag> Tags { get; set; }
-        public virtual List<Theme> Themes { get; set; }
+        public Name Name { get; protected set; }
+        public Description Description { get; protected set; }
+        public Visibility Visibility { get; protected set; }
+        public EditPermission EditPermission { get; protected set; }
+        public virtual List<Tag> Tags { get; protected set; }
+        public virtual List<Theme> Themes { get; protected set; }
 
         public Dictionary()
         {
@@ -31,7 +32,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public void AddTag(Tag tag)
         {
             if (tag == null)
-                throw new ArgumentNullException("The tag cannot be null or empty.");
+                throw new ArgumentNullException("The tag cannot be null.");
 
             Tags.Add(tag);
         }

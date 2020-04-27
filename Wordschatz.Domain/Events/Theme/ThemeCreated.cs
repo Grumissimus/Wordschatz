@@ -10,6 +10,7 @@ namespace Wordschatz.Domain.Events.Dictionary
         public readonly ulong Id;
         public readonly ulong DictionaryId;
         public readonly string Name;
+
         public ThemeCreated(ulong id, ulong dictId, string name)
         {
             Id = id;

@@ -8,6 +8,7 @@ namespace Wordschatz.Domain.Events.Theme
     {
         public readonly ulong ThemeId;
         public readonly ulong MarkId;
+
         public MarkToTheThemeAdded(ulong themeId, ulong markId)
         {
             ThemeId = themeId;

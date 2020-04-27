@@ -13,10 +13,10 @@ namespace Wordschatz.Domain.Models.Marks
         public Description(string description)
         {
             if (description == null)
-                throw new ArgumentException("The dictionary description cannot be null.");
+                throw new ArgumentException("The mark's description cannot be null.");
 
             if (description.Length > MaximumLength)
-                throw new ArgumentException($"The dictionary description cannot be longer than {MaximumLength} characters.");
+                throw new ArgumentException($"The mark's description cannot be longer than {MaximumLength} characters.");
 
             Value = description;
         }

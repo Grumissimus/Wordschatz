@@ -13,10 +13,10 @@ namespace Wordschatz.Domain.Models.Marks
         public Name(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The dictionary name must be in a human readable format.");
+                throw new ArgumentException("The mark's name must be in a human readable format.");
 
             if (name.Length > MaximumLength)
-                throw new ArgumentException($"The dictionary name cannot be longer than {MaximumLength} characters.");
+                throw new ArgumentException($"The mark's name cannot be longer than {MaximumLength} characters.");
 
             Value = name;
         }

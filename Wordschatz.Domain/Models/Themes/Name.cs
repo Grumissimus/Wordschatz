@@ -13,10 +13,10 @@ namespace Wordschatz.Domain.Models.Themes
         public Name(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("The theme name must be in a human readable format.");
+                throw new ArgumentException("The theme's name must be in a human readable format.");
 
             if (name.Length > MaximumLength)
-                throw new ArgumentException($"The theme name cannot be longer than {MaximumLength} characters.");
+                throw new ArgumentException($"The theme's name cannot be longer than {MaximumLength} characters.");
 
             Value = name;
         }

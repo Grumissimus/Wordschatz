@@ -75,6 +75,17 @@ namespace Wordschatz.Domain.Models.Themes
 
         public IThemeBuilder SetParent(Theme parent)
         {
+            if (parent == null)
+            {
+                this.parent = null;
+                return this;
+            }
+
+            if ( parent.Id == id )
+            {
+                throw new ArgumentException("The child theme cannot be its parent.");
+            }
+
             this.parent = parent;
             return this;
         }

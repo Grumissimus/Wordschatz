@@ -22,12 +22,16 @@ namespace Wordschatz.Domain.Models.Words
         }
         public void ChangeTerm(string term)
         {
-            Term = string.IsNullOrWhiteSpace(term) ? term : throw new ArgumentNullException("The term must be in human readable format.");
+            Term = string.IsNullOrWhiteSpace(term) ? 
+                term : 
+                throw new ArgumentNullException("The term must be in human readable format.");
         }
 
         public void ChangeDefinition(string definition)
         {
-            Meaning = string.IsNullOrWhiteSpace(definition) ? definition : throw new ArgumentNullException("The definition must be in human readable format.");
+            Meaning = string.IsNullOrWhiteSpace(definition) ?
+                definition : 
+                throw new ArgumentNullException("The definition must be in human readable format.");
         }
 
         public void ChangeTheme(Theme newTheme)

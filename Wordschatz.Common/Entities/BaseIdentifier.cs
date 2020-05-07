@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Wordschatz.Common.Entities
 {
@@ -13,8 +12,9 @@ namespace Wordschatz.Common.Entities
             Value = id;
         }
 
-        public static BaseIdentifier For(ulong id){
-            if(id < 0)
+        public static BaseIdentifier For(ulong id)
+        {
+            if (id < 0)
             {
                 throw new ArgumentException("Base identifier cannot be lower than zero");
             }

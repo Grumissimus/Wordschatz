@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Common.Events;
+﻿using Wordschatz.Common.Events;
 
-namespace Wordschatz.Domain.Events.Dictionary
+namespace Wordschatz.Domain.Events.Dictionaries
 {
     public class DictionaryRenamed : IEvent
     {

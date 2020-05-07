@@ -1,0 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Wordschatz.Domain.Models;
+
+namespace Wordschatz.Infrastructure.Configuration
+{
+	public class <+class_name+>EntityConfiguration : IEntityTypeConfiguration<<+class_name+>>
+	{
+		public void Configure(EntityTypeBuilder<<+class_name+>> builder)
+		{
+			builder.ToTable("<+class_name+>");
+		}
+	}
+}
+

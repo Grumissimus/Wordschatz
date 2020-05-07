@@ -1,6 +1,6 @@
 ﻿namespace Wordschatz.Common.Events
 {
-    interface IExternalEvent : IEvent
+    internal interface IExternalEvent : IEvent
     {
     }
 }

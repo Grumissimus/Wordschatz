@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wordschatz.Domain.Events.Theme
+﻿namespace Wordschatz.Domain.Events.Theme
 {
-    class MarkToTheThemeAdded
+    internal class MarkToTheThemeAdded
     {
         public readonly ulong ThemeId;
         public readonly ulong MarkId;

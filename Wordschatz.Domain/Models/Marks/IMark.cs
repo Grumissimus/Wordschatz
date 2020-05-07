@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Marks
@@ -10,5 +8,6 @@ namespace Wordschatz.Domain.Models.Marks
         void ChangeName(string name);
         void ChangeDescription(string description);
         void AddWord(Word word);
+        void AddTheme(Theme theme);
     }
 }

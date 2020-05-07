@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Common.Events;
+﻿using Wordschatz.Common.Events;
 using Wordschatz.Domain.Models.Dictionaries;
 
-namespace Wordschatz.Domain.Events.Dictionary
+namespace Wordschatz.Domain.Events.Dictionaries
 {
     public class DictionaryAccessChanged : IEvent
     {

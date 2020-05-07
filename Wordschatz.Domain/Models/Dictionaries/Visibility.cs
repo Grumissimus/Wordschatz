@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wordschatz.Domain.Models.Dictionaries
+﻿namespace Wordschatz.Domain.Models.Dictionaries
 {
     public enum Visibility
     {

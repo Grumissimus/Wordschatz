@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Wordschatz.Common.Entities;
+using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.Domain.Models.Dictionaries
@@ -11,7 +12,8 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public Description Description { get; protected set; }
         public Visibility Visibility { get; protected set; }
         public EditPermission EditPermission { get; protected set; }
-        public virtual List<Tag> Tags { get; protected set; }
+        public Password Password { get; protected set; }
+        public virtual List<DictionaryMarks> Marks { get; protected set; }
         public virtual List<Theme> Themes { get; protected set; }
 
         public Dictionary()
@@ -25,16 +27,17 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Description = builder.description;
             Visibility = builder.visibility;
             EditPermission = builder.editPermission;
-            Tags = builder.tags;
+            Password = builder.password;
+            Marks = builder.marks;
             Themes = builder.themes;
         }
 
-        public void AddTag(Tag tag)
+        public void AddMark(Mark mark)
         {
-            if (tag == null)
+            if (mark == null)
                 throw new ArgumentNullException("The tag cannot be null.");
 
-            Tags.Add(tag);
+            Marks.Add( new DictionaryMarks(mark, this) );
         }
 
         public void AddTheme(Theme theme)

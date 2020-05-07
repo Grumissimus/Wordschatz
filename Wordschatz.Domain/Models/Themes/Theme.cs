@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
@@ -17,7 +16,7 @@ namespace Wordschatz.Domain.Models.Themes
         public virtual Theme Parent { get; protected set; }
 
         public virtual List<Word> Words { get; protected set; }
-        public virtual List<MarkTheme> Marks { get; protected set; }
+        public virtual List<ThemeMarks> Marks { get; protected set; }
 
         public Theme()
         {
@@ -29,17 +28,17 @@ namespace Wordschatz.Domain.Models.Themes
             Dictionary = builder.dictionary;
             DictionaryId = builder.dictionary.Id;
             Parent = builder.parent;
-            ParentId = builder.parent != null ? builder.parent.Id : 0;
+            ParentId = builder.parent != null ? (ulong?)builder.parent.Id : null;
 
             Words = builder.words;
-            foreach(Word word in Words)
+            foreach (Word word in Words)
             {
                 word.ChangeTheme(this);
             }
 
-            Marks = new List<MarkTheme>();
+            Marks = new List<ThemeMarks>();
             builder.marks.ForEach(
-                x => Marks.Add( new MarkTheme(x, this) )
+                x => Marks.Add(new ThemeMarks(x, this))
             );
         }
 
@@ -53,10 +52,10 @@ namespace Wordschatz.Domain.Models.Themes
 
         public void AddMark(Mark mark)
         {
-            if(mark == null)
+            if (mark == null)
                 throw new ArgumentNullException("The mark cannot be null.");
 
-            Marks.Add( new MarkTheme(mark, this) );
+            Marks.Add(new ThemeMarks(mark, this));
         }
     }
 }

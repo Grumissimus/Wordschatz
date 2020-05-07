@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Wordschatz.Common.Events;
 
 namespace Wordschatz.Common.Entities
@@ -25,7 +23,7 @@ namespace Wordschatz.Common.Entities
 
         public void LoadsFromHistory(IEnumerable<IEvent> history)
         {
-            foreach (var e in history) 
+            foreach (var e in history)
                 ApplyChange(e, false);
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Words;
@@ -40,9 +39,10 @@ namespace Wordschatz.Domain.Models.Themes
             words.Add(word);
             return this;
         }
+
         private void Validate()
         {
-            if(name == null)
+            if (name == null)
                 throw new ArgumentNullException("The name cannot be null.");
 
             if (dictionary == null)
@@ -81,7 +81,7 @@ namespace Wordschatz.Domain.Models.Themes
                 return this;
             }
 
-            if ( parent.Id == id )
+            if (parent.Id == id)
             {
                 throw new ArgumentException("The child theme cannot be its parent.");
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Common.Entities;
+using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Marks
@@ -13,12 +13,12 @@ namespace Wordschatz.Domain.Models.Marks
     {
         public Name Name { get; protected set; }
         public Description Description { get; protected set; }
-
-        public virtual List<MarkWord> Words { get; protected set; }
+        public virtual List<WordMarks> Words { get; protected set; }
+        public virtual List<ThemeMarks> Themes { get; protected set; }
+        public virtual List<DictionaryMarks> Dictionaries { get; protected set; }
 
         public Mark()
         {
-
         }
 
         public Mark(ulong id, string name, string description)
@@ -26,7 +26,8 @@ namespace Wordschatz.Domain.Models.Marks
             Id = id;
             Name = new Name(name);
             Description = new Description(description);
-            Words = new List<MarkWord>();
+            Words = new List<WordMarks>();
+            Themes = new List<ThemeMarks>();
         }
 
         public void ChangeName(string name)
@@ -44,7 +45,14 @@ namespace Wordschatz.Domain.Models.Marks
             if (word == null)
                 throw new ArgumentNullException("The word cannot be null.");
 
-            Words.Add(new MarkWord(this, word));
+            Words.Add(new WordMarks(this, word));
+        }
+        public void AddTheme(Theme theme)
+        {
+            if (theme == null)
+                throw new ArgumentNullException("The word cannot be null.");
+
+            Themes.Add(new ThemeMarks(this, theme));
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System;
 using Wordschatz.Domain.Models.Dictionaries;
 
 namespace Wordschatz.Domain.Tests.DictionaryTests
 {
-    class DictionaryTests
+    internal class DictionaryTests
     {
-        Dictionary dictionary;
+        private Dictionary dictionary;
 
         [SetUp]
         public void Setup()

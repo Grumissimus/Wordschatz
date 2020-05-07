@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Themes;
@@ -14,23 +13,23 @@ namespace Wordschatz.Domain.Models.Words
 
         public ulong ThemeId { get; protected set; }
         public virtual Theme Theme { get; protected set; }
-        public virtual List<MarkWord> Marks { get; protected set; }
+        public virtual List<WordMarks> Marks { get; protected set; }
 
         public Word()
         {
-
         }
+
         public void ChangeTerm(string term)
         {
-            Term = string.IsNullOrWhiteSpace(term) ? 
-                term : 
+            Term = string.IsNullOrWhiteSpace(term) ?
+                term :
                 throw new ArgumentNullException("The term must be in human readable format.");
         }
 
         public void ChangeDefinition(string definition)
         {
             Meaning = string.IsNullOrWhiteSpace(definition) ?
-                definition : 
+                definition :
                 throw new ArgumentNullException("The definition must be in human readable format.");
         }
 
@@ -45,8 +44,7 @@ namespace Wordschatz.Domain.Models.Words
             if (mark == null)
                 throw new ArgumentNullException("The mark cannot be null.");
 
-            Marks.Add(new MarkWord(mark, this));
+            Marks.Add(new WordMarks(mark, this));
         }
-
     }
 }

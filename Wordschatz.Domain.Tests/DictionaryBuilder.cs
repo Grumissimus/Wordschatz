@@ -6,7 +6,7 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
 {
     public class DictionaryBuilderTests
     {
-        DictionaryBuilder builder;
+        private DictionaryBuilder builder;
 
         [SetUp]
         public void Setup()
@@ -17,7 +17,7 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
         [Test]
         public void DictionaryBuilder_ThrowsArgumentException_IfUserTriesToBuildWithoutSetName()
         {
-            Assert.Throws<ArgumentNullException>( () => builder.Build() );
+            Assert.Throws<ArgumentNullException>(() => builder.Build());
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
         public void DictionaryBuilder_ThrowsArgumentException_IfTheNameIsLongerThenMaximumAmountOfCharacter()
         {
             Assert.Throws<ArgumentException>(
-                () => builder.SetName(new string('*', Name.MaximumLength + 1) )
+                () => builder.SetName(new string('*', Name.MaximumLength + 1))
             );
         }
 
@@ -65,21 +65,13 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentNullException_IfTheTagIsNullOrEmpty()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => builder.AddTag(null)
-            );
-        }
-
-        [Test]
         public void DictionaryBuilder_ReturnsDictionaryWithDefaultValues()
         {
             Dictionary dict = builder
                 .SetName("Test Dictionary")
                 .SetDescription("Dictionary used in testing")
                 .Build();
-            
+
             Assert.IsInstanceOf<Dictionary>(dict);
             Assert.AreEqual(dict.Name.Value, "Test Dictionary");
             Assert.AreEqual(dict.Description.Value, "Dictionary used in testing");

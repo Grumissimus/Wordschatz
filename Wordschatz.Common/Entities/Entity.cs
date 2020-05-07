@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Wordschatz.Common.Entities
+﻿namespace Wordschatz.Common.Entities
 {
     /// <summary>
     /// A base class for entity object
@@ -21,7 +17,8 @@ namespace Wordschatz.Common.Entities
 
             return ReferenceEquals(this, that);
         }
-        public static bool operator == (Entity a, Entity b)
+
+        public static bool operator ==(Entity a, Entity b)
         {
             if (a is null && b is null) return true;
             if (a is null || b is null) return false;
@@ -29,7 +26,7 @@ namespace Wordschatz.Common.Entities
             return a.Equals(b);
         }
 
-        public static bool operator != (Entity a, Entity b)
+        public static bool operator !=(Entity a, Entity b)
         {
             return !(a == b);
         }

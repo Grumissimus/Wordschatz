@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.Domain.Models.Dictionaries
@@ -12,8 +10,8 @@ namespace Wordschatz.Domain.Models.Dictionaries
         IDictionaryBuilder SetDescription(string description);
         IDictionaryBuilder SetVisibility(Visibility visibility);
         IDictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel);
+        IDictionaryBuilder SetPassword(string password);
         IDictionaryBuilder AddTheme(Theme theme);
-        IDictionaryBuilder AddTag(Tag tag);
         Dictionary Build();
     }
 }

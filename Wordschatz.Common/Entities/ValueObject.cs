@@ -21,6 +21,7 @@ namespace Wordschatz.Common.Entities
 
             return GetEqualityComponents().SequenceEqual(that.GetEqualityComponents());
         }
+
         public override int GetHashCode()
         {
             return GetEqualityComponents()
@@ -32,6 +33,7 @@ namespace Wordschatz.Common.Entities
                 }
             });
         }
+
         public static bool operator ==(ValueObject a, ValueObject b)
         {
             if (a is null && b is null)

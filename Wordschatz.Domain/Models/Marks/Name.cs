@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Common.Entities;
 
 namespace Wordschatz.Domain.Models.Marks

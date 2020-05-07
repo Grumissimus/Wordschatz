@@ -2,16 +2,14 @@ using NUnit.Framework;
 using System;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Themes;
-
-using DictionaryName = Wordschatz.Domain.Models.Dictionaries;
 using ThemeName = Wordschatz.Domain.Models.Themes.Name;
 
 namespace Wordschatz.Domain.Tests.ThemeBuilderTests
 {
     public class ThemeBuilderTests
     {
-        ThemeBuilder builder;
-        Dictionary mockDictionary;
+        private ThemeBuilder builder;
+        private Dictionary mockDictionary;
 
         [SetUp]
         public void Setup()
@@ -27,7 +25,7 @@ namespace Wordschatz.Domain.Tests.ThemeBuilderTests
         [Test]
         public void ThemeBuilder_Build_ThrowsArgumentExceptionIfUserTriesToBuildWithoutSetName()
         {
-            Assert.Throws<ArgumentNullException>( () => builder.Build() );
+            Assert.Throws<ArgumentNullException>(() => builder.Build());
         }
 
         [Test]
@@ -41,7 +39,7 @@ namespace Wordschatz.Domain.Tests.ThemeBuilderTests
         {
             Assert.Throws<ArgumentException>(() => builder.SetName(""));
         }
-        
+
         [Test]
         public void ThemeBuilder_SetName_ThrowsArgumentExceptionIfTheNameIsLongerThenMaximumAmountOfCharacter()
         {

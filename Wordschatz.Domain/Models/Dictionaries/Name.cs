@@ -6,8 +6,13 @@ namespace Wordschatz.Domain.Models.Dictionaries
 {
     public class Name : ValueObject
     {
-        public string Value { get; }
+        public string Value { get; private set; }
         public static readonly int MaximumLength = 64;
+
+        private Name()
+        {
+
+        }
 
         public Name(string name)
         {

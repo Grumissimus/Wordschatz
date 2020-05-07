@@ -12,6 +12,10 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public static readonly int SaltLength = 256;
         public static readonly int HashLength = 256;
 
+        private Password()
+        {
+
+        }
         public Password(string pass)
         {
             if (string.IsNullOrWhiteSpace(pass))

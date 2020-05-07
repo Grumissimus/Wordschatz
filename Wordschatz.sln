@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.Application", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.Infrastructure", "Wordschatz.Infrastructure\Wordschatz.Infrastructure.csproj", "{FE48E44F-C977-4567-A853-C5C3B0FDE5B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordschatz.API", "Wordschatz.API\Wordschatz.API.csproj", "{F5E21FAD-80D5-4E5C-8936-D601EE90259C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.API", "Wordschatz.API\Wordschatz.API.csproj", "{F5E21FAD-80D5-4E5C-8936-D601EE90259C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordschatz.Infrastructure.Tests", "Wordschatz.Infrastructure.Tests\Wordschatz.Infrastructure.Tests.csproj", "{C51E933B-91AB-4C10-BF5F-FA1B44E233CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{F5E21FAD-80D5-4E5C-8936-D601EE90259C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5E21FAD-80D5-4E5C-8936-D601EE90259C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5E21FAD-80D5-4E5C-8936-D601EE90259C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C51E933B-91AB-4C10-BF5F-FA1B44E233CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51E933B-91AB-4C10-BF5F-FA1B44E233CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51E933B-91AB-4C10-BF5F-FA1B44E233CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51E933B-91AB-4C10-BF5F-FA1B44E233CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

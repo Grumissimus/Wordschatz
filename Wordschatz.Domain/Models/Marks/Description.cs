@@ -9,6 +9,10 @@ namespace Wordschatz.Domain.Models.Marks
         public string Value { get; }
         public static readonly int MaximumLength = 255;
 
+        private Description()
+        {
+
+        }
         public Description(string description)
         {
             if (description == null)

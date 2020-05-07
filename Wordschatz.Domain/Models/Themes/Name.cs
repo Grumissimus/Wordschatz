@@ -9,6 +9,10 @@ namespace Wordschatz.Domain.Models.Themes
         public string Value { get; }
         public static readonly int MaximumLength = 64;
 
+        private Name()
+        {
+
+        }
         public Name(string name)
         {
             if (string.IsNullOrWhiteSpace(name))

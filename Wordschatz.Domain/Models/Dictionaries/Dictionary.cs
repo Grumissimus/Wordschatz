@@ -16,7 +16,10 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public virtual List<DictionaryMarks> Marks { get; protected set; }
         public virtual List<Theme> Themes { get; protected set; }
 
-        public Dictionary()
+        /// <summary>
+        /// EF Core constructor
+        /// </summary>
+        private Dictionary()
         {
         }
 
@@ -34,6 +37,18 @@ namespace Wordschatz.Domain.Models.Dictionaries
             foreach (Mark m in builder.marks)
             {
                 Marks.Add(new DictionaryMarks(m, this));
+            }
+        }
+        public void ChangeName(string name)
+        {
+            try
+            {
+                Name newName = new Name(name);
+                Name = newName;
+            }
+            catch
+            {
+                return;
             }
         }
 

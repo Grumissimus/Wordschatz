@@ -12,6 +12,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         IDictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel);
         IDictionaryBuilder SetPassword(string password);
         IDictionaryBuilder AddTheme(Theme theme);
+        IDictionaryBuilder AddMark(Mark mark);
         Dictionary Build();
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Boekje.Domain.Common.Queries
+namespace Wordschatz.Common.Queries
 {
-    internal interface IQueryBus
+    public interface IQueryBus
     {
         Task<TResult> Send<TQuery, TResult>(TQuery Command) where TQuery : IQuery<TResult>;
     }

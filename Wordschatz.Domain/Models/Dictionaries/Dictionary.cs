@@ -28,8 +28,13 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Visibility = builder.visibility;
             EditPermission = builder.editPermission;
             Password = builder.password;
-            Marks = builder.marks;
             Themes = builder.themes;
+            Marks = new List<DictionaryMarks>();
+
+            foreach (Mark m in builder.marks)
+            {
+                Marks.Add(new DictionaryMarks(m, this));
+            }
         }
 
         public void AddMark(Mark mark)

@@ -1,6 +1,6 @@
-﻿namespace Boekje.Domain.Common.Queries
+﻿namespace Wordschatz.Common.Queries
 {
-    internal interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery<TResult>
+    public interface IQueryHandler<in TQuery, TResult> where TQuery : IQuery<TResult>
     {
         TResult Execute(TQuery query);
     }

@@ -1,15 +1,13 @@
 ﻿using Wordschatz.Common.Events;
-using Wordschatz.Domain.Models.Dictionaries;
+using DictionaryModel = Wordschatz.Domain.Models.Dictionaries.Dictionary;
 
 namespace Wordschatz.Domain.Events.Dictionaries {
     public class DictionaryCreated : IEvent
     {
-        public readonly ulong Id;
-        public readonly IDictionary Dictionary;
+        public readonly DictionaryModel Dictionary;
 
-        public DictionaryCreated(ulong id, IDictionary dict)
+        public DictionaryCreated(DictionaryModel dict)
         {
-            Id = id;
             Dictionary = dict;
         }
     }

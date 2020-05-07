@@ -1,6 +1,6 @@
-﻿namespace Boekje.Domain.Common.Queries
+﻿namespace Wordschatz.Common.Queries
 {
-    internal interface IQuery<out TQuery>
+    public interface IQuery<out TQuery>
     {
     }
 }

@@ -9,6 +9,7 @@ namespace Wordschatz.Application.Commands
         public string Description { get; set; }
         public ulong DictionaryId { get; set; }
         public ulong? ParentId { get; set; }
+
         public CreateThemeCommand(string name, string description, ulong dictionaryId, ulong? parentId)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

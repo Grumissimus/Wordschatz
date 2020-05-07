@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>674eadcb-4f3d-4f30-ae30-46f966f0646d</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wordschatz.Application\Wordschatz.Application.csproj" />
+    <ProjectReference Include="..\Wordschatz.Infrastructure\Wordschatz.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>

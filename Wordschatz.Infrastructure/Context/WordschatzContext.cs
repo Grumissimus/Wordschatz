@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Domain.Models.Words;
 using Wordschatz.Domain.Models.Marks;
-using System.Text;
 
 namespace Wordschatz.Infrastructure.Context
 {
@@ -14,18 +12,16 @@ namespace Wordschatz.Infrastructure.Context
     {
         protected WordschatzContext()
         {
-
         }
 
         public WordschatzContext(DbContextOptions<WordschatzContext> options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             if (builder == null)
-            {
                 throw new ArgumentNullException(nameof(builder));
-            }
 
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(

@@ -2,7 +2,7 @@
 using Wordschatz.Common.Commands;
 using Wordschatz.Domain.Models.Dictionaries;
 
-namespace Wordschatz.Application.Commands
+namespace Wordschatz.Application.Commands.Dictionaries
 {
     public class EditDictionaryCommand : ICommand
     {
@@ -28,6 +28,5 @@ namespace Wordschatz.Application.Commands
                 Password = password;
             }
         }
-
     }
 }

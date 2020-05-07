@@ -14,6 +14,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public Visibility visibility;
         public EditPermission editPermission;
         public List<Theme> themes;
+        internal List<Mark> marks;
 
         public DictionaryBuilder()
         {
@@ -24,11 +25,20 @@ namespace Wordschatz.Domain.Models.Dictionaries
             visibility = Visibility.Public;
             editPermission = EditPermission.OnlyCreator;
             themes = new List<Theme>();
+            marks = new List<Mark>();
         }
 
         public IDictionaryBuilder SetId(ulong id)
         {
             this.id = id;
+            return this;
+        }
+        public IDictionaryBuilder AddMark(Mark mark)
+        {
+            if (mark == null)
+                throw new ArgumentNullException("The theme cannot be null.");
+
+            marks.Add(mark);
             return this;
         }
 

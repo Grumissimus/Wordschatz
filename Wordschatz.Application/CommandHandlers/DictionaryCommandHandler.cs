@@ -35,7 +35,7 @@ namespace Wordschatz.Application.CommandHandlers
                 .SetPassword(command.Password)
                 .Build();
 
-            _dbContext.Dictionaries.AddAsync(newDict);
+            _dbContext.Dictionaries.Add(newDict);
             _dbContext.SaveChanges();
         }
 

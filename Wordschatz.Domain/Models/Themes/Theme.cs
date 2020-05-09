@@ -27,6 +27,7 @@ namespace Wordschatz.Domain.Models.Themes
             Name = builder.name;
             Dictionary = builder.dictionary;
             DictionaryId = builder.dictionary.Id;
+            Dictionary.AddTheme(this);
             Parent = builder.parent;
             ParentId = builder.parent != null ? (ulong?)builder.parent.Id : null;
 
@@ -56,6 +57,35 @@ namespace Wordschatz.Domain.Models.Themes
                 throw new ArgumentNullException("The mark cannot be null.");
 
             Marks.Add(new ThemeMarks(mark, this));
+        }
+
+        public void ChangeName(string newName)
+        {
+            try { 
+                Name nName = new Name(newName);
+                Name = nName;
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        public void MoveToOtherDictionary(Dictionary newDictionary)
+        {
+            if (newDictionary == null)
+                throw new ArgumentNullException(nameof(newDictionary));
+
+            if (newDictionary.Id == Dictionary.Id || newDictionary.Themes.Contains(this))
+                return;
+
+            Dictionary.RemoveTheme(this);
+        }
+
+        public void ChangeParent(Theme newParent)
+        {
+            Parent = newParent ?? throw new ArgumentNullException(nameof(newParent));
+            ParentId = newParent.Id;
         }
     }
 }

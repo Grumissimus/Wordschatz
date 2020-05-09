@@ -11,7 +11,7 @@ namespace Wordschatz.Application.Commands.Dictionaries
 
         public DeleteDictionaryCommand(uint id)
         {
-            Id = Id;
+            Id = id;
         }
     }
 }

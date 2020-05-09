@@ -21,6 +21,8 @@ namespace Wordschatz.Domain.Models.Dictionaries
         /// </summary>
         private Dictionary()
         {
+            Themes = new List<Theme>();
+            Marks = new List<DictionaryMarks>();
         }
 
         public Dictionary(DictionaryBuilder builder)
@@ -67,5 +69,26 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
             Themes.Add(theme);
         }
+        public void RemoveTheme(Theme theme)
+        {
+            if (theme == null)
+                throw new ArgumentNullException(nameof(theme));
+
+            Themes.Remove(theme);
+        }
+
+        public void RemoveMark(Mark mark)
+        {
+            if (mark == null)
+                throw new ArgumentNullException(nameof(mark));
+
+            var markToRemove = Marks.Find(m => m.DictionaryId == m.Dictionary.Id && m.Mark.Id == mark.Id);
+
+            if (markToRemove == null)
+                return;
+
+            Marks.Remove(markToRemove);
+        }
+
     }
 }

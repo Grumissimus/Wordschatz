@@ -6,7 +6,7 @@ namespace Wordschatz.Domain.Models.Themes
 {
     public class Name : ValueObject
     {
-        public string Value { get; }
+        public string Value { get; private set; }
         public static readonly int MaximumLength = 64;
 
         private Name()
@@ -21,7 +21,7 @@ namespace Wordschatz.Domain.Models.Themes
             if (name.Length > MaximumLength)
                 throw new ArgumentException($"The theme's name cannot be longer than {MaximumLength} characters.");
 
-            Value = name;
+            this.Value = name;
         }
 
         protected override IEnumerable<object> GetEqualityComponents()

@@ -65,7 +65,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
         public IDictionaryBuilder SetName(string name)
         {
-            this.name = new Name(name);
+            this.name = name;
             return this;
         }
 

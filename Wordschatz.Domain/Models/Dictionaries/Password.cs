@@ -16,6 +16,9 @@ namespace Wordschatz.Domain.Models.Dictionaries
         {
 
         }
+
+        public static implicit operator Password(string pass) => new Password(pass);
+
         public Password(string pass)
         {
             if (string.IsNullOrWhiteSpace(pass))
@@ -24,6 +27,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Salt = GenerateSalt();
             Hash = GenerateHash(pass);
         }
+
 
         private byte[] GenerateSalt()
         {

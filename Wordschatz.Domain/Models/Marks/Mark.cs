@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Domain.Models.Words;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Marks
 {
@@ -11,11 +12,11 @@ namespace Wordschatz.Domain.Models.Marks
     /// </summary>
     public class Mark : EventSourcedAggregate, IMark
     {
-        public Name Name { get; protected set; }
-        public Description Description { get; protected set; }
-        public virtual List<WordMarks> Words { get; protected set; }
-        public virtual List<ThemeMarks> Themes { get; protected set; }
-        public virtual List<DictionaryMarks> Dictionaries { get; protected set; }
+        public Name Name { get; private set; }
+        public Description Description { get; private set; }
+        public virtual List<WordMarks> Words { get; private set; }
+        public virtual List<ThemeMarks> Themes { get; private set; }
+        public virtual List<DictionaryMarks> Dictionaries { get; private set; }
 
         public Mark()
         {

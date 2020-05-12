@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Themes;
-using Name = Wordschatz.Domain.Models.Themes.Name;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Infrastructure.Configuration
 {

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Wordschatz.Domain.Models.Dictionaries;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Infrastructure.Configuration
 {

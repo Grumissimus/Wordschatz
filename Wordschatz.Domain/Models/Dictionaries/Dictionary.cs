@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Themes;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Dictionaries
 {
     public class Dictionary : EventSourcedAggregate, IDictionary
     {
-        public Name Name { get; protected set; }
-        public Description Description { get; protected set; }
-        public Visibility Visibility { get; protected set; }
-        public EditPermission EditPermission { get; protected set; }
-        public Password Password { get; protected set; }
-        public virtual List<DictionaryMarks> Marks { get; protected set; }
-        public virtual List<Theme> Themes { get; protected set; }
+        public Name Name { get; private set; }
+        public Description Description { get; private set; }
+        public Visibility Visibility { get; private set; }
+        public EditPermission EditPermission { get; private set; }
+        public Password Password { get; private set; }
+        public virtual List<DictionaryMarks> Marks { get; private set; }
+        public virtual List<Theme> Themes { get; private set; }
 
         /// <summary>
         /// EF Core constructor
@@ -27,31 +28,24 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
         public Dictionary(DictionaryBuilder builder)
         {
-            Id = builder.id;
-            Name = builder.name;
-            Description = builder.description;
-            Visibility = builder.visibility;
-            EditPermission = builder.editPermission;
-            Password = builder.password;
-            Themes = builder.themes;
+            Id = builder.Id;
+            Name = builder.Name;
+            Description = builder.Description;
+            Visibility = builder.Visibility;
+            EditPermission = builder.EditPermission;
+            Password = builder.Password;
+            Themes = builder.Themes;
             Marks = new List<DictionaryMarks>();
 
-            foreach (Mark m in builder.marks)
+            foreach (Mark m in builder.Marks)
             {
                 Marks.Add(new DictionaryMarks(m, this));
             }
         }
+
         public void ChangeName(string name)
         {
-            try
-            {
-                Name newName = new Name(name);
-                Name = newName;
-            }
-            catch
-            {
-                return;
-            }
+            Name = new Name(name);
         }
 
         public void AddMark(Mark mark)
@@ -59,7 +53,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
             if (mark == null)
                 throw new ArgumentNullException("The tag cannot be null.");
 
-            Marks.Add( new DictionaryMarks(mark, this) );
+            Marks.Add(new DictionaryMarks(mark, this));
         }
 
         public void AddTheme(Theme theme)
@@ -69,6 +63,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
             Themes.Add(theme);
         }
+
         public void RemoveTheme(Theme theme)
         {
             if (theme == null)
@@ -89,6 +84,5 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
             Marks.Remove(markToRemove);
         }
-
     }
 }

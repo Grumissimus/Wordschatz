@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Words;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Themes
 {
@@ -43,10 +44,10 @@ namespace Wordschatz.Domain.Models.Themes
         private void Validate()
         {
             if (name == null)
-                throw new ArgumentNullException("The name cannot be null.");
+                throw new ArgumentException("The name cannot be null.");
 
             if (dictionary == null)
-                throw new ArgumentNullException("The dictionary cannot be null.");
+                throw new ArgumentException("The dictionary cannot be null.");
         }
 
         public Theme Build()

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wordschatz.Domain.Models.Marks;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Infrastructure.Configuration
 {

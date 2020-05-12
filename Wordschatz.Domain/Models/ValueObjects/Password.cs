@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Wordschatz.Common.Entities;
 
-namespace Wordschatz.Domain.Models.Dictionaries
+namespace Wordschatz.Domain.Models.ValueObjects
 {
     public class Password : ValueObject
     {
@@ -22,7 +22,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public Password(string pass)
         {
             if (string.IsNullOrWhiteSpace(pass))
-                throw new ArgumentNullException(nameof(pass));
+                throw new ArgumentException("Password must be in a human-readable format");
 
             Salt = GenerateSalt();
             Hash = GenerateHash(pass);

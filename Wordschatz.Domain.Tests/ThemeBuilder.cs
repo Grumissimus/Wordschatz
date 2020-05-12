@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Themes;
-using ThemeName = Wordschatz.Domain.Models.Themes.Name;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Tests.ThemeBuilderTests
 {
@@ -25,26 +25,21 @@ namespace Wordschatz.Domain.Tests.ThemeBuilderTests
         [Test]
         public void ThemeBuilder_Build_ThrowsArgumentExceptionIfUserTriesToBuildWithoutSetName()
         {
-            Assert.Throws<ArgumentNullException>(() => builder.Build());
+            Assert.Throws<ArgumentException>(() => builder.Build());
         }
 
-        [Test]
-        public void ThemeBuilder_SetName_ThrowsArgumentExceptionIfTheNameIsNull()
+        [TestCase(null)]
+        [TestCase("")]
+        public void ThemeBuilder_SetName_Negative(string name)
         {
-            Assert.Throws<ArgumentException>(() => builder.SetName(null));
-        }
-
-        [Test]
-        public void ThemeBuilder_SetName_ThrowsArgumentExceptionIfTheNameIsEmpty()
-        {
-            Assert.Throws<ArgumentException>(() => builder.SetName(""));
+            Assert.Throws<ArgumentException>(() => builder.SetName(name));
         }
 
         [Test]
         public void ThemeBuilder_SetName_ThrowsArgumentExceptionIfTheNameIsLongerThenMaximumAmountOfCharacter()
         {
             Assert.Throws<ArgumentException>(
-                () => builder.SetName(new string('*', ThemeName.MaximumLength + 1))
+                () => builder.SetName(new string('*', Name.MaximumLength + 1))
             );
         }
 

@@ -4,19 +4,20 @@ using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Words;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Themes
 {
     public class Theme : EventSourcedAggregate, ITheme
     {
-        public Name Name { get; protected set; }
-        public ulong DictionaryId { get; protected set; }
-        public virtual Dictionary Dictionary { get; protected set; }
-        public ulong? ParentId { get; protected set; }
-        public virtual Theme Parent { get; protected set; }
+        public Name Name { get; private set; }
+        public ulong DictionaryId { get; private set; }
+        public virtual Dictionary Dictionary { get; private set; }
+        public ulong? ParentId { get; private set; }
+        public virtual Theme Parent { get; private set; }
 
-        public virtual List<Word> Words { get; protected set; }
-        public virtual List<ThemeMarks> Marks { get; protected set; }
+        public virtual List<Word> Words { get; private set; }
+        public virtual List<ThemeMarks> Marks { get; private set; }
 
         public Theme()
         {

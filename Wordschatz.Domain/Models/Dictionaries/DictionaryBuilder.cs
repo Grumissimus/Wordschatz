@@ -2,94 +2,88 @@
 using System.Collections.Generic;
 using Wordschatz.Domain.Models.Marks;
 using Wordschatz.Domain.Models.Themes;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Dictionaries
 {
     public class DictionaryBuilder : IDictionaryBuilder
     {
-        public ulong id;
-        public Name name;
-        public Description description;
-        public Password password;
-        public Visibility visibility;
-        public EditPermission editPermission;
-        public List<Theme> themes;
-        internal List<Mark> marks;
+        public ulong Id { get; private set; }
+        public Name Name { get; private set; }
+        public Description Description { get; private set; }
+        public Password Password { get; private set; }
+        public Visibility Visibility { get; private set; }
+        public EditPermission EditPermission { get; private set; }
+        public List<Theme> Themes { get; private set; }
+        public List<Mark> Marks { get; private set; }
 
         public DictionaryBuilder()
         {
-            id = 0;
-            name = null;
-            description = new Description("");
-            password = null;
-            visibility = Visibility.Public;
-            editPermission = EditPermission.OnlyCreator;
-            themes = new List<Theme>();
-            marks = new List<Mark>();
+            Id = 0;
+            Name = new Name("New Dictionary");
+            Description = new Description("");
+            Password = null;
+            Visibility = Visibility.Public;
+            EditPermission = EditPermission.OnlyCreator;
+            Themes = new List<Theme>();
+            Marks = new List<Mark>();
         }
 
         public IDictionaryBuilder SetId(ulong id)
         {
-            this.id = id;
+            this.Id = id;
             return this;
         }
         public IDictionaryBuilder AddMark(Mark mark)
         {
             if (mark == null)
-                throw new ArgumentNullException("The theme cannot be null.");
+                throw new ArgumentException("The mark cannot be null.");
 
-            marks.Add(mark);
+            Marks.Add(mark);
             return this;
         }
 
         public IDictionaryBuilder AddTheme(Theme theme)
         {
             if (theme == null)
-                throw new ArgumentNullException("The theme cannot be null.");
+                throw new ArgumentException("The theme cannot be null.");
 
-            themes.Add(theme);
+            Themes.Add(theme);
             return this;
         }
 
         public IDictionaryBuilder SetDescription(string description)
         {
-            this.description = new Description(description);
+            Description = new Description(description);
             return this;
         }
 
         public IDictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel)
         {
-            this.editPermission = permissionLevel;
+            EditPermission = permissionLevel;
             return this;
         }
 
         public IDictionaryBuilder SetName(string name)
         {
-            this.name = name;
+            Name = new Name(name);
             return this;
         }
 
         public IDictionaryBuilder SetVisibility(Visibility visibility)
         {
-            this.visibility = visibility;
+            Visibility = visibility;
             return this;
         }
 
         public IDictionaryBuilder SetPassword(string password)
         {
-            this.password = new Password(password);
+            Password = new Password(password);
             return this;
-        }
-
-        private void Validate()
-        {
-            if (name == null)
-                throw new ArgumentNullException("The dictionary must have the name.");
         }
 
         public Dictionary Build()
         {
-            Validate();
             return new Dictionary(this);
         }
     }

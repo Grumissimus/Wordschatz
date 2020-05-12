@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using Wordschatz.Domain.Models.Dictionaries;
+using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
 {
@@ -12,12 +13,6 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
         public void Setup()
         {
             builder = new DictionaryBuilder();
-        }
-
-        [Test]
-        public void DictionaryBuilder_ThrowsArgumentException_IfUserTriesToBuildWithoutSetName()
-        {
-            Assert.Throws<ArgumentNullException>(() => builder.Build());
         }
 
         [Test]
@@ -57,9 +52,9 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
         }
 
         [Test]
-        public void DictionaryBuilder_ThrowsArgumentNullException_IfTheThemeIsNull()
+        public void DictionaryBuilder_ThrowsArgumentException_IfTheThemeIsNull()
         {
-            Assert.Throws<ArgumentNullException>(
+            Assert.Throws<ArgumentException>(
                 () => builder.AddTheme(null)
             );
         }
@@ -73,8 +68,8 @@ namespace Wordschatz.Domain.Tests.DictionaryBuilderTests
                 .Build();
 
             Assert.IsInstanceOf<Dictionary>(dict);
-            Assert.AreEqual(dict.Name.Value, "Test Dictionary");
-            Assert.AreEqual(dict.Description.Value, "Dictionary used in testing");
+            Assert.AreEqual((string)dict.Name, "Test Dictionary");
+            Assert.AreEqual((string)dict.Description, "Dictionary used in testing");
             Assert.AreEqual(dict.Visibility, Visibility.Public);
             Assert.AreEqual(dict.EditPermission, EditPermission.OnlyCreator);
         }

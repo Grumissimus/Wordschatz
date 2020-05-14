@@ -11,9 +11,9 @@ namespace Wordschatz.Domain.Models.Themes
     public class Theme : EventSourcedAggregate, ITheme
     {
         public Name Name { get; private set; }
-        public ulong DictionaryId { get; private set; }
+        public long DictionaryId { get; private set; }
         public virtual Dictionary Dictionary { get; private set; }
-        public ulong? ParentId { get; private set; }
+        public long? ParentId { get; private set; }
         public virtual Theme Parent { get; private set; }
 
         public virtual List<Word> Words { get; private set; }
@@ -30,7 +30,7 @@ namespace Wordschatz.Domain.Models.Themes
             DictionaryId = builder.dictionary.Id;
             Dictionary.AddTheme(this);
             Parent = builder.parent;
-            ParentId = builder.parent != null ? (ulong?)builder.parent.Id : null;
+            ParentId = builder.parent != null ? (long?)builder.parent.Id : null;
 
             Words = builder.words;
             foreach (Word word in Words)

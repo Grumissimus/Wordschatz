@@ -12,15 +12,23 @@ namespace Wordschatz.Application.Commands.Dictionaries
         public EditPermission EditPermission { get; set; }
         public string Password { get; set; }
 
+        // output property
+        public long DictionaryId { get; internal set; }
+
+        public CreateDictionaryCommand()
+        {
+
+        }
+
         public CreateDictionaryCommand(string name, string description, Visibility visibility, EditPermission editPermission, string password)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Description = description ?? throw new ArgumentNullException(nameof(description));
-            Visibility = visibility;
-            EditPermission = editPermission;
+            Visibility = visibility | Visibility.Public;
+            EditPermission = editPermission | EditPermission.OnlyCreator;
             if (string.IsNullOrEmpty(password) && visibility == Visibility.PasswordProtected)
             {
-                throw new ArgumentNullException(nameof(password));
+                throw new ArgumentException("Dictionaries protected by password requires a password (obviously).");
             }
             else
             {

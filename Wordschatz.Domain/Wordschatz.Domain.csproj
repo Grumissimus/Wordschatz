@@ -5,12 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Validators\**" />
+    <EmbeddedResource Remove="Models\Validators\**" />
+    <None Remove="Models\Validators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Wordschatz.Common\Wordschatz.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="Models\Validators\" />
   </ItemGroup>
 
 </Project>

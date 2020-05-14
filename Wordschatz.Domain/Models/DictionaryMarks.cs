@@ -5,9 +5,9 @@ namespace Wordschatz.Domain.Models
 {
     public class DictionaryMarks
     {
-        public ulong MarkId { get; set; }
+        public long MarkId { get; set; }
         public virtual Mark Mark { get; set; }
-        public ulong DictionaryId { get; set; }
+        public long DictionaryId { get; set; }
         public virtual Dictionary Dictionary { get; set; }
 
         public DictionaryMarks()

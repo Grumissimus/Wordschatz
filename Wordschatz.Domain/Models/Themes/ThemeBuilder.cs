@@ -9,7 +9,7 @@ namespace Wordschatz.Domain.Models.Themes
 {
     public class ThemeBuilder : IThemeBuilder
     {
-        public ulong id;
+        public long id;
         public Name name;
         public Dictionary dictionary;
         public Theme parent;
@@ -62,7 +62,7 @@ namespace Wordschatz.Domain.Models.Themes
             return this;
         }
 
-        public IThemeBuilder SetId(ulong id)
+        public IThemeBuilder SetId(long id)
         {
             this.id = id;
             return this;

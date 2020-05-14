@@ -11,7 +11,7 @@ namespace Wordschatz.Domain.Models.Words
         public string Term { get; protected set; }
         public string Meaning { get; protected set; }
 
-        public ulong ThemeId { get; protected set; }
+        public long ThemeId { get; protected set; }
         public virtual Theme Theme { get; protected set; }
         public virtual List<WordMarks> Marks { get; protected set; }
 

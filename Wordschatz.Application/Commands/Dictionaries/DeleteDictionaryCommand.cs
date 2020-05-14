@@ -7,9 +7,14 @@ namespace Wordschatz.Application.Commands.Dictionaries
 {
     public class DeleteDictionaryCommand : ICommand
     {
-        public uint Id { get; set; }
+        public long Id { get; set; }
 
-        public DeleteDictionaryCommand(uint id)
+        public DeleteDictionaryCommand()
+        {
+
+        }
+
+        public DeleteDictionaryCommand(long id)
         {
             Id = id;
         }

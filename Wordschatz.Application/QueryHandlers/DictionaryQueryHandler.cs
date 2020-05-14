@@ -26,7 +26,7 @@ namespace Wordschatz.Application.QueryHandlers
             if(query == null)
                 throw new ArgumentNullException(nameof(query));
 
-            Dictionary dict = _dbContext.Dictionaries.Find(query.Id);
+            Dictionary dict = _dbContext.Dictionaries.Find( query.Id );
 
             return dict;
         }

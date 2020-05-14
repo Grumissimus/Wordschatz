@@ -8,8 +8,8 @@ namespace Wordschatz.Application.Queries.Dictionaries
 {
     public class DictionaryGetByIdQuery : IQuery<Dictionary>
     {
-        public uint Id { get; set; }
-        public DictionaryGetByIdQuery(uint id)
+        public long Id { get; set; }
+        public DictionaryGetByIdQuery(long id)
         {
             Id = id;
         }

@@ -5,7 +5,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
 {
     public interface IDictionaryBuilder
     {
-        IDictionaryBuilder SetId(ulong id);
+        IDictionaryBuilder SetId(long id);
         IDictionaryBuilder SetName(string name);
         IDictionaryBuilder SetDescription(string description);
         IDictionaryBuilder SetVisibility(Visibility visibility);

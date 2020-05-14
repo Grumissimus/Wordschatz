@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wordschatz.Application.Queries.Dictionaries
+namespace Wordschatz.Application.ReadModels
 {
     /// <summary>
     /// The real model for the dictionary domain model.
     /// </summary>
     public class DictionaryReadModel
     {
-        public uint Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<string> Marks { get; set; }
+        public int ThemeCount { get; set; }
     }
 }

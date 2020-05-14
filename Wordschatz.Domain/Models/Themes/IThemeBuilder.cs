@@ -6,7 +6,7 @@ namespace Wordschatz.Domain.Models.Themes
 {
     public interface IThemeBuilder
     {
-        IThemeBuilder SetId(ulong id);
+        IThemeBuilder SetId(long id);
 
         IThemeBuilder SetName(string name);
 

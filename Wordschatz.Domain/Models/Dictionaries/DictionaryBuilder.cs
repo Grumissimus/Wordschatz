@@ -8,7 +8,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
 {
     public class DictionaryBuilder : IDictionaryBuilder
     {
-        public ulong Id { get; private set; }
+        public long Id { get; private set; }
         public Name Name { get; private set; }
         public Description Description { get; private set; }
         public Password Password { get; private set; }
@@ -29,7 +29,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Marks = new List<Mark>();
         }
 
-        public IDictionaryBuilder SetId(ulong id)
+        public IDictionaryBuilder SetId(long id)
         {
             this.Id = id;
             return this;
@@ -78,6 +78,9 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
         public IDictionaryBuilder SetPassword(string password)
         {
+            if (string.IsNullOrEmpty(password) && Visibility != Visibility.PasswordProtected)
+                return this;
+
             Password = new Password(password);
             return this;
         }

@@ -37,6 +37,8 @@ namespace Wordschatz.Application.CommandHandlers
 
             _dbContext.Dictionaries.Add(newDict);
             _dbContext.SaveChanges();
+
+            command.DictionaryId = newDict.Id;
         }
 
         public void Execute(EditDictionaryCommand command)
@@ -51,8 +53,8 @@ namespace Wordschatz.Application.CommandHandlers
                 .SetId(command.DictionaryId)
                 .SetName(command.Name)
                 .SetDescription(command.Description)
-                .SetVisibility(command.Visibility)
-                .SetEditPermissionLevel(command.EditPermission)
+                .SetVisibility((Visibility)command.VisibilityLevel)
+                .SetEditPermissionLevel((EditPermission)command.EditPermission)
                 .SetPassword(command.Password)
                 .Build();
 

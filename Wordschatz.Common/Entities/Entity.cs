@@ -1,4 +1,6 @@
-﻿namespace Wordschatz.Common.Entities
+﻿using System;
+
+namespace Wordschatz.Common.Entities
 {
     /// <summary>
     /// A base class for entity object
@@ -6,7 +8,20 @@
     // The code comes from: https://enterprisecraftsmanship.com/posts/entity-base-class/
     public abstract class Entity
     {
-        public ulong Id { get; protected set; }
+        private long _id;
+        public long Id {
+
+            get => _id;
+
+            protected set {
+                if (value < 0)
+                {
+                    throw new ArgumentException("The identifier cannot be a negative number");
+                }
+
+                _id = value;
+            }
+        }
         protected virtual object Actual => this;
 
         public override bool Equals(object obj)

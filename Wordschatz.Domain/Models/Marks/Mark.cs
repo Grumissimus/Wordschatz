@@ -22,7 +22,7 @@ namespace Wordschatz.Domain.Models.Marks
         {
         }
 
-        public Mark(ulong id, string name, string description)
+        public Mark(long id, string name, string description)
         {
             Id = id;
             Name = new Name(name);

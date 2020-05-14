@@ -5,9 +5,9 @@ namespace Wordschatz.Domain.Models
 {
     public class ThemeMarks
     {
-        public ulong MarkId { get; set; }
+        public long MarkId { get; set; }
         public virtual Mark Mark { get; set; }
-        public ulong ThemeId { get; set; }
+        public long ThemeId { get; set; }
         public virtual Theme Theme { get; set; }
 
         public ThemeMarks()

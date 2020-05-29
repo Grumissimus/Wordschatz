@@ -53,8 +53,8 @@ namespace Wordschatz.Application.CommandHandlers
                 .SetId(command.DictionaryId)
                 .SetName(command.Name)
                 .SetDescription(command.Description)
-                .SetVisibility((Visibility)command.VisibilityLevel)
-                .SetEditPermissionLevel((EditPermission)command.EditPermission)
+                .SetVisibility(command.VisibilityLevel)
+                .SetEditPermissionLevel(command.EditPermission)
                 .SetPassword(command.Password)
                 .Build();
 

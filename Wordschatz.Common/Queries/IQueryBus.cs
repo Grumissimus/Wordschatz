@@ -4,6 +4,6 @@ namespace Wordschatz.Common.Queries
 {
     public interface IQueryBus
     {
-        Task<TResult> Send<TQuery, TResult>(TQuery Command) where TQuery : IQuery<TResult>;
+        TResult Send<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>;
     }
 }

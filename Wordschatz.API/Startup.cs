@@ -5,13 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wordschatz.Application.CommandHandlers;
-using Wordschatz.Application.Interfaces;
-using Wordschatz.Application.QueryHandlers;
 using Wordschatz.Infrastructure.Context;
+using MediatR;
+using System.Reflection;
+using Wordschatz.Common.Commands;
+using Wordschatz.API.Buses;
+using Wordschatz.Common.Queries;
+using System;
+using System.Linq;
 
 namespace Wordschatz.API
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -24,13 +29,17 @@ namespace Wordschatz.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            IoC.Configure();
+
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddSingleton<ICommandBus, CommandBus>();
+            services.AddSingleton<IQueryBus, QueryBus>();
+
             services.AddDbContext<WordschatzContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WordschatzDatabase")));
 
-            services.AddScoped<ICommandHandlerService, DictionaryCommandHandler>();
-            services.AddScoped<IQueryHandlerService, DictionaryQueryHandler>();
-
+            services.AddMediatR(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

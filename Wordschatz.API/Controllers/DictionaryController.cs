@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Wordschatz.Application.CommandHandlers;
-using Wordschatz.Application.Commands.Dictionaries;
-using Wordschatz.Application.Interfaces;
-using Wordschatz.Application.Queries.Dictionaries;
-using Wordschatz.Application.QueryHandlers;
-using Wordschatz.Application.ReadModels;
+using Wordschatz.API.Buses;
+using Wordschatz.Application.Dictionaries.Commands;
+using Wordschatz.Application.Dictionaries.Mapper;
+using Wordschatz.Application.Dictionaries.Queries;
+using Wordschatz.Application.Dictionaries.ReadModels;
+using Wordschatz.Common.Commands;
+using Wordschatz.Common.Queries;
 using Wordschatz.Domain.Models.Dictionaries;
 
 namespace Wordschatz.API.Controllers
@@ -18,69 +19,57 @@ namespace Wordschatz.API.Controllers
     [Route("api/[controller]/")]
     public class DictionaryController : ControllerBase
     {
-        private readonly DictionaryQueryHandler _queryHandler;
-        private readonly DictionaryCommandHandler _commandHandler;
-        public DictionaryController(IQueryHandlerService queryHandler, ICommandHandlerService commandHandler)
+        private readonly ICommandBus _commandBus;
+        private readonly IQueryBus _queryBus;
+        public DictionaryController(ICommandBus commandBus, IQueryBus queryBus)
         {
-            _queryHandler = (DictionaryQueryHandler)queryHandler;
-            _commandHandler = (DictionaryCommandHandler)commandHandler;
+            _commandBus = commandBus;
+            _queryBus = queryBus;
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public DictionaryReadModel Get([FromRoute]long id)
+        public IActionResult Get([FromRoute]long id)
         {
-            DictionaryReadModel res = null;
-
             try
             {
-                Dictionary dict = _queryHandler.Execute(new DictionaryGetByIdQuery(id));
-                res = DictionaryMapper.MapToReadModel(dict);
+                Dictionary result = _queryBus.Send<DictionaryGetByIdQuery, Dictionary>( new DictionaryGetByIdQuery(id) );
+                return Ok(DictionaryMapper.MapToReadModel(result));
             }
-            catch(ArgumentException e)
+            catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                return BadRequest(e.Message);
             }
-
-            return res;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IEnumerable<DictionaryReadModel> GetMany([FromQuery]int pages = 1, [FromQuery]int amount = 20)
+        public IActionResult GetMany([FromQuery]int amount = 20, [FromQuery]int pages = 1)
         {
             try
             {
-                var dictionaries = _queryHandler.Execute(new DictionaryGetManyQuery(pages, amount));
-                List <DictionaryReadModel> result = new List<DictionaryReadModel>();
-
-                foreach( Dictionary d in dictionaries )
-                {
-                    result.Add( DictionaryMapper.MapToReadModel(d) );
-                }
-
-                return result.ToArray();
+                IEnumerable<Dictionary> result = _queryBus.Send<DictionaryGetManyQuery, List<Dictionary>>(new DictionaryGetManyQuery(amount, pages));
+                return Ok(result.Select(x => DictionaryMapper.MapToReadModel(x)));
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return new List<DictionaryReadModel>();
+                return BadRequest(e.Message);
             }
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Create([FromBody] CreateDictionaryCommand dictionary)
+        public IActionResult Create([FromBody] CreateDictionaryCommand command)
         {
             try
             {
-                _commandHandler.Execute( dictionary );
-                long dictionaryId = dictionary.DictionaryId;
+                _commandBus.Send(command);
+                long dictionaryId = command.DictionaryId;
                 return RedirectToAction("Get", new { id = dictionaryId });
             }
             catch (Exception e)
@@ -92,12 +81,12 @@ namespace Wordschatz.API.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put([FromRoute]long id, [FromBody] EditDictionaryCommand dictionary)
+        public IActionResult Put([FromRoute]long id, [FromBody] EditDictionaryCommand command)
         {
             try
             {
-                dictionary.DictionaryId = id;
-                _commandHandler.Execute(dictionary);
+                command.DictionaryId = id;
+                _commandBus.Send(command);
                 return Ok();
             }
             catch (Exception e)
@@ -111,7 +100,7 @@ namespace Wordschatz.API.Controllers
         {
             try
             {
-                _commandHandler.Execute( new DeleteDictionaryCommand(id) );
+                _commandBus.Send( new DeleteDictionaryCommand(id) );
                 return Ok();
             }
             catch (Exception e)

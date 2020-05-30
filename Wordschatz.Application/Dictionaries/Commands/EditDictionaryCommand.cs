@@ -15,23 +15,15 @@ namespace Wordschatz.Application.Dictionaries.Commands
 
         public EditDictionaryCommand()
         {
-
         }
 
         public EditDictionaryCommand(string name, string description, Visibility visibility, EditPermission editPermission, string password)
         {
-            Name = name ?? throw new ArgumentException(nameof(name));
-            Description = description ?? throw new ArgumentException(nameof(description));
-            VisibilityLevel = visibility;
-            EditPermission = editPermission;
-            if (string.IsNullOrEmpty(password) && visibility == Visibility.PasswordProtected)
-            {
-                throw new ArgumentException("Dictionary with password protection requires a password");
-            }
-            else
-            {
-                Password = password;
-            }
+            Name = name;
+            Description = description;
+            VisibilityLevel = visibility | Visibility.Public;
+            EditPermission = editPermission | EditPermission.OnlyCreator;
+            Password = password;
         }
     }
 }

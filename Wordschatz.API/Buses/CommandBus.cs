@@ -11,7 +11,7 @@ namespace Wordschatz.API.Buses
     {
         public void Send<T>(T command) where T : ICommand
         {
-            var handler = IoC.Container.Resolve<ICommandHandler<T>>() as ICommandHandler<T>;
+            var handler = IoC.Container.Resolve<ICommandHandler<T>>();
 
             if(handler == null)
             {

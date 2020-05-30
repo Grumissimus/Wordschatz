@@ -7,7 +7,7 @@ using Wordschatz.Application.Themes.Queries;
 using Wordschatz.Infrastructure.Context;
 using System.Linq;
 
-namespace Wordschatz.Application.Themes.QueryHandlers
+namespace Wordschatz.Application.Themes.Queries.Handlers
 {
     public class ThemeGetByIdQueryHandler : IQueryHandler<ThemeGetByIdQuery, Theme>
     {

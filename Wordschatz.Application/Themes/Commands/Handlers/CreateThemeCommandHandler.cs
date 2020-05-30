@@ -1,12 +1,14 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
+using Wordschatz.Application.Dictionaries.Commands.Validators;
 using Wordschatz.Application.Themes.Commands;
 using Wordschatz.Common.Commands;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Infrastructure.Context;
 
-namespace Wordschatz.Application.Themes.CommandHandlers
+namespace Wordschatz.Application.Themes.Commands.Handlers
 {
     public class CreateThemeCommandHandler : ICommandHandler<CreateThemeCommand>
     {

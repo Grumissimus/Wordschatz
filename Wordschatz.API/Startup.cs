@@ -9,6 +9,8 @@ using MediatR;
 using Wordschatz.Common.Commands;
 using Wordschatz.API.Buses;
 using Wordschatz.Common.Queries;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace Wordschatz.API
 {
@@ -25,7 +27,12 @@ namespace Wordschatz.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(
+                    fv => {
+                        fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    }
+                );
 
             services.AddDbContext<WordschatzContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WordschatzDatabase")));

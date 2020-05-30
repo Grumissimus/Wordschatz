@@ -13,6 +13,7 @@ using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
 using Wordschatz.Domain.Models.Dictionaries;
 
+// Todo: Replace try/catch statements with the other way to message errors.
 namespace Wordschatz.API.Controllers
 {
     [ApiController]
@@ -36,10 +37,13 @@ namespace Wordschatz.API.Controllers
             try
             {
                 Dictionary result = _queryBus.Send<DictionaryGetByIdQuery, Dictionary>( new DictionaryGetByIdQuery(id) );
+                if (result == null) return NotFound(null);
+
                 return Ok(DictionaryMapper.MapToReadModel(result));
             }
             catch (Exception e)
             {
+                Console.Error.Write(e);
                 return BadRequest();
             }
         }
@@ -58,6 +62,7 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
+                Console.Error.Write(e);
                 return BadRequest();
             }
         }
@@ -75,6 +80,7 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
+                Console.Error.Write(e);
                 return BadRequest();
             }
         }
@@ -92,7 +98,8 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                Console.Error.Write(e);
+                return BadRequest();
             }
         }
 
@@ -106,7 +113,8 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                Console.Error.Write(e);
+                return BadRequest();
             }
         }
     }

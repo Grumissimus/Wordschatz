@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -25,13 +26,17 @@ namespace Wordschatz.API
             var handlers = Assembly.Load("Wordschatz.Application");
 
             builder.RegisterAssemblyTypes(handlers)
-            .AsClosedTypesOf(typeof(ICommandHandler<>))
-            .InstancePerLifetimeScope();
+                .AsClosedTypesOf(typeof(ICommandHandler<>))
+                .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(handlers)
-            .AsClosedTypesOf(typeof(IQueryHandler<,>))
-            .InstancePerLifetimeScope();
-            
+                .AsClosedTypesOf(typeof(IQueryHandler<,>))
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(handlers)
+                .AsClosedTypesOf(typeof(IValidator<>))
+                .InstancePerLifetimeScope();
+
             Container = builder.Build();
         }
     }

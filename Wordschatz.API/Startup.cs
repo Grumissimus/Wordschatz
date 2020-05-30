@@ -14,8 +14,31 @@ using Wordschatz.Common.Queries;
 using System;
 using System.Linq;
 
+using Wordschatz.Application;
+using Wordschatz.Application.Dictionaries.Commands;
+using Wordschatz.Application.Dictionaries.CommandHandlers;
+using Wordschatz.Application.Dictionaries.QueryHandlers;
+using Wordschatz.Application.Dictionaries.Queries;
+using Wordschatz.Domain.Models.Dictionaries;
+using System.Collections.Generic;
+
 namespace Wordschatz.API
 {
+    public static class ServiceExtensions
+    {
+        public static void AddCommandQueryHandlers(this IServiceCollection services, Type handlerInterface)
+        {
+            var handlers = Assembly.GetExecutingAssembly().GetTypes().Where(t => (t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface)));
+
+            Console.WriteLine( handlers.Count() );
+
+            foreach (var handler in handlers)
+            {
+                Console.WriteLine(handler.Name);
+                services.AddScoped(handler.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == handlerInterface), handler);
+            }
+        }
+    }
 
     public class Startup
     {
@@ -29,17 +52,18 @@ namespace Wordschatz.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IoC.Configure();
 
             services.AddControllers().AddNewtonsoftJson();
-
-            services.AddSingleton<ICommandBus, CommandBus>();
-            services.AddSingleton<IQueryBus, QueryBus>();
 
             services.AddDbContext<WordschatzContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("WordschatzDatabase")));
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            
+            services.AddSingleton<ICommandBus, CommandBus>();
+            services.AddSingleton<IQueryBus, QueryBus>();
+
+            IoC.Build(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

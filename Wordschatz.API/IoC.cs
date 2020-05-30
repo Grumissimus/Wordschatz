@@ -1,12 +1,14 @@
 ﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Wordschatz.Application.Dictionaries.QueryHandlers;
 using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
+using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.API
 {
@@ -14,22 +16,22 @@ namespace Wordschatz.API
     {
         public static IContainer Container { get; set; }
 
-        public static void Configure()
+        public static void Build(IServiceCollection services)
         {
             var builder = new ContainerBuilder();
-            Assembly assemblies = Assembly.GetExecutingAssembly();
 
-            builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => t.IsInNamespace("Wordschatz.Application") && t.IsAssignableFrom(typeof(ICommandHandler<>)))
-                .AsSelf()
-                .AsImplementedInterfaces();
+            builder.Populate(services);
 
-            builder
-                .RegisterAssemblyTypes(assemblies)
-                .Where(t => t.IsInNamespace("Wordschatz.Application") && t.IsAssignableFrom(typeof(IQueryHandler<,>)))
-                .AsSelf()
-                .AsImplementedInterfaces();
+            var handlers = Assembly.Load("Wordschatz.Application");
 
+            builder.RegisterAssemblyTypes(handlers)
+            .AsClosedTypesOf(typeof(ICommandHandler<>))
+            .InstancePerDependency();
+
+            builder.RegisterAssemblyTypes(handlers)
+            .AsClosedTypesOf(typeof(IQueryHandler<,>))
+            .InstancePerDependency();
+            
             Container = builder.Build();
         }
     }

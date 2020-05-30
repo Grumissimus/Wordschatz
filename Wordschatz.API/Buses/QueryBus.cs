@@ -12,15 +12,8 @@ namespace Wordschatz.API.Buses
     {
         public TResult Send<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>
         {
-            var handlers = IoC.Container.Resolve<IEnumerable<IQueryHandler<TQuery,TResult>>>().ToList();
-
-            return handlers.Count switch
-            {
-                0 => throw new Exception($"Query does not have any handler {query.GetType().Name}"),
-                1 => handlers[0].Execute(query),
-                _ => throw new Exception($"Too many registred handlers - {handlers.Count} for query {query.GetType().Name}"),
-            };
-            ;
+            var handler = IoC.Container.Resolve < IQueryHandler<TQuery, TResult> >();
+            return handler.Execute(query);
         }
     }
 }

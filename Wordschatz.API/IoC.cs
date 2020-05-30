@@ -26,11 +26,11 @@ namespace Wordschatz.API
 
             builder.RegisterAssemblyTypes(handlers)
             .AsClosedTypesOf(typeof(ICommandHandler<>))
-            .InstancePerDependency();
+            .InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(handlers)
             .AsClosedTypesOf(typeof(IQueryHandler<,>))
-            .InstancePerDependency();
+            .InstancePerLifetimeScope();
             
             Container = builder.Build();
         }

@@ -6,7 +6,7 @@ using Wordschatz.Common.Commands;
 using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Infrastructure.Context;
 
-namespace Wordschatz.Application.Commands.Themes
+namespace Wordschatz.Application.Themes.CommandHandlers
 {
     public class EditThemeCommandHandler : ICommandHandler<EditThemeCommand>
     {

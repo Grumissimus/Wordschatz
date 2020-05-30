@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using Wordschatz.Application.Dictionaries.Commands;
 using Wordschatz.Common.Commands;
 using Wordschatz.Domain.Models.Dictionaries;
@@ -23,6 +24,11 @@ namespace Wordschatz.Application.Dictionaries.CommandHandlers
             if (command.DictionaryId <= 0)
                 throw new ArgumentException("Id must be a positive number bigger than zero.");
 
+            Dictionary oldDict = _dbContext.Dictionaries.Find(command.DictionaryId);
+
+            if(oldDict != null)
+                _dbContext.Dictionaries.Remove(oldDict);
+
             Dictionary newDict = new DictionaryBuilder()
                 .SetId(command.DictionaryId)
                 .SetName(command.Name)
@@ -32,7 +38,7 @@ namespace Wordschatz.Application.Dictionaries.CommandHandlers
                 .SetPassword(command.Password)
                 .Build();
 
-            _dbContext.Dictionaries.Update(newDict);
+            _dbContext.Dictionaries.Add(newDict);
             _dbContext.SaveChanges();
         }
     }

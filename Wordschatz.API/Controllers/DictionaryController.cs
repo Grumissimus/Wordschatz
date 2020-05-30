@@ -40,7 +40,7 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 
@@ -52,12 +52,13 @@ namespace Wordschatz.API.Controllers
         {
             try
             {
-                IEnumerable<Dictionary> result = _queryBus.Send<DictionaryGetManyQuery, List<Dictionary>>(new DictionaryGetManyQuery(amount, pages));
-                return Ok(result.Select(x => DictionaryMapper.MapToReadModel(x)));
+                IEnumerable<Dictionary> dicts = _queryBus.Send<DictionaryGetManyQuery, List<Dictionary>>(new DictionaryGetManyQuery(amount, pages));
+                var result = dicts.Select(x => DictionaryMapper.MapToReadModel(x)) ?? null;
+                return Ok(result);
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest();
             }
         }
 
@@ -74,7 +75,7 @@ namespace Wordschatz.API.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest();
             }
         }
 

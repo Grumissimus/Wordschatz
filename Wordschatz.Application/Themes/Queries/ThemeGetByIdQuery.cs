@@ -4,7 +4,7 @@ using System.Text;
 using Wordschatz.Domain.Models.Themes;
 using Wordschatz.Common.Queries;
 
-namespace Wordschatz.Application.Queries.Themes
+namespace Wordschatz.Application.Themes.Queries
 {
     public class ThemeGetByIdQuery : IQuery<Theme>
     {

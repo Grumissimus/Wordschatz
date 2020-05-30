@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Wordschatz.Common.Queries;
 using Wordschatz.Domain.Models.Themes;
-using Wordschatz.Application.Queries.Themes;
+using Wordschatz.Application.Themes.Queries;
 using Wordschatz.Infrastructure.Context;
 using System.Linq;
 
-namespace Wordschatz.Application.QueryHandlers
+namespace Wordschatz.Application.Themes.QueryHandlers
 {
     public class ThemeGetByIdQueryHandler : IQueryHandler<ThemeGetByIdQuery, Theme>
     {

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Wordschatz.Application.ReadModels;
+using Wordschatz.Application.Themes.ReadModels;
 using Wordschatz.Domain.Models;
 using Wordschatz.Domain.Models.Themes;
 
-namespace Wordschatz.Application.QueryHandlers
+namespace Wordschatz.Application.Themes.Mappers
 {
     public static class ThemeMapper
     {

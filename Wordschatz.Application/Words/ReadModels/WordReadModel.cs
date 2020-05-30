@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wordschatz.Application.ReadModels
+namespace Wordschatz.Application.Words.ReadModels
 {
     class WordReadModel
     {

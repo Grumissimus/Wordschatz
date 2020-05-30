@@ -12,7 +12,12 @@ namespace Wordschatz.API.Buses
     {
         public TResult Send<TQuery, TResult>(TQuery query) where TQuery : IQuery<TResult>
         {
-            var handler = IoC.Container.Resolve < IQueryHandler<TQuery, TResult> >();
+            var handler = IoC.Container.Resolve < IQueryHandler<TQuery, TResult> >() as IQueryHandler<TQuery, TResult>;
+
+            if (handler == null)
+            {
+                throw new Exception($"No handler for query {nameof(query)} has been found.");
+            }
             return handler.Execute(query);
         }
     }

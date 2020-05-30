@@ -8,8 +8,8 @@ namespace Wordschatz.Application.Dictionaries.Commands.Validators
         public DeleteDictionaryCommandValidator()
         {
             RuleFor(command => command.Id)
-                .NotNull()
-                .GreaterThanOrEqualTo(1);
+                .NotNull().WithMessage("The identifier of the dictionary cannot be null.")
+                .GreaterThanOrEqualTo(1).WithMessage("The identifier of the dictionary must be a positive non-zero number.");
         }
     }
 }

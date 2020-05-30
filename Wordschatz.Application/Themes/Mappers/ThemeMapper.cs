@@ -12,7 +12,7 @@ namespace Wordschatz.Application.Themes.Mappers
         public static ThemeReadModel MapToReadModel(Theme theme)
         {
             if (theme == null)
-                throw new ArgumentException("Dictionary cannot be a null value");
+                throw new ArgumentException("Theme cannot be a null value");
 
             ThemeReadModel themeRead = new ThemeReadModel
             {

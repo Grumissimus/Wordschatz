@@ -11,7 +11,6 @@ namespace Wordschatz.Domain.Models.ValueObjects
         public string Hash { get; private set; }
         public static readonly int SaltLength = 256;
         public static readonly int HashLength = 256;
-
         private Password()
         {
 
@@ -27,7 +26,6 @@ namespace Wordschatz.Domain.Models.ValueObjects
             Salt = GenerateSalt();
             Hash = GenerateHash(pass);
         }
-
 
         private byte[] GenerateSalt()
         {

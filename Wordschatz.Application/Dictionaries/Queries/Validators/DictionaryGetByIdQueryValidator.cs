@@ -7,8 +7,8 @@ namespace Wordschatz.Application.Dictionaries.Queries.Validators
         public DictionaryGetByIdQueryValidator()
         {
             RuleFor(x => x.Id)
-                .NotNull()
-                .GreaterThanOrEqualTo(1);
+                .NotNull().WithMessage("The identifier of the dictionary cannot be a null value")
+                .GreaterThanOrEqualTo(1).WithMessage("The identifier of the dictionary must be a positive non-zero number");
         }
     }
 }

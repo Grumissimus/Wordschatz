@@ -14,12 +14,11 @@ namespace Wordschatz.Application.Themes.Commands
 
         public CreateThemeCommand()
         {
-
         }
 
         public CreateThemeCommand(string name, long dictionaryId, long? parentId)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Name = name;
             DictionaryId = dictionaryId;
             ParentId = parentId;
         }

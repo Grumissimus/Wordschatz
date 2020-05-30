@@ -12,7 +12,6 @@ namespace Wordschatz.Application.Themes.Commands
 
         public DeleteThemeCommand()
         {
-
         }
 
         public DeleteThemeCommand(long id, long did)

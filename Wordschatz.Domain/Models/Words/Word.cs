@@ -23,26 +23,26 @@ namespace Wordschatz.Domain.Models.Words
         {
             Term = string.IsNullOrWhiteSpace(term) ?
                 term :
-                throw new ArgumentNullException("The term must be in human readable format.");
+                throw new ArgumentException("The term must be in human readable format.");
         }
 
         public void ChangeDefinition(string definition)
         {
             Meaning = string.IsNullOrWhiteSpace(definition) ?
                 definition :
-                throw new ArgumentNullException("The definition must be in human readable format.");
+                throw new ArgumentException("The definition must be in human readable format.");
         }
 
         public void ChangeTheme(Theme newTheme)
         {
-            Theme = newTheme ?? throw new ArgumentNullException("The new theme cannot be null.");
+            Theme = newTheme ?? throw new ArgumentException("The new theme cannot be null.");
             ThemeId = newTheme.Id;
         }
 
         public void AddMark(Mark mark)
         {
             if (mark == null)
-                throw new ArgumentNullException("The mark cannot be null.");
+                throw new ArgumentException("The mark cannot be null.");
 
             Marks.Add(new WordMarks(mark, this));
         }

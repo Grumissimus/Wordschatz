@@ -9,6 +9,16 @@
     <Compile Remove="Migrations\20200513115944_Init.Designer.cs" />
     <Compile Remove="Migrations\20200513120352_Init.cs" />
     <Compile Remove="Migrations\20200513120352_Init.Designer.cs" />
+    <Compile Remove="Migrations\20200531232414_UniqueIndexFix.cs" />
+    <Compile Remove="Migrations\20200531232414_UniqueIndexFix.Designer.cs" />
+    <Compile Remove="Migrations\20200531232459_UniqueIndexFix.cs" />
+    <Compile Remove="Migrations\20200531232459_UniqueIndexFix.Designer.cs" />
+    <Compile Remove="Migrations\20200531232649_UniqueIndexFix.cs" />
+    <Compile Remove="Migrations\20200531232649_UniqueIndexFix.Designer.cs" />
+    <Compile Remove="Migrations\20200531233210_UniqueIndexFix.cs" />
+    <Compile Remove="Migrations\20200531233210_UniqueIndexFix.Designer.cs" />
+    <Compile Remove="Migrations\20200531233512_UniqueIndexFix.cs" />
+    <Compile Remove="Migrations\20200531233512_UniqueIndexFix.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,6 +27,13 @@ namespace Wordschatz.Application.Themes.Queries.Handlers
             if (query == null)
                 throw new ArgumentNullException(nameof(query));
 
+            var result = _validator.Validate(query);
+
+            if (!result.IsValid)
+            {
+                return null;
+            }
+
             List<Theme> dict = (from d in _dbContext.Themes where d.DictionaryId == query.DictionaryId select d).ToList();
             int skipNum = (query.PageNum > 1 ? query.PageNum - 1 : 0) * query.Amount;
             dict.Skip(skipNum).Take(query.Amount);

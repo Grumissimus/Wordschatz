@@ -7,8 +7,10 @@ namespace Wordschatz.Application.Themes.Queries.Validators
         public ThemesGetByIdQueryValidator()
         {
             RuleFor(x => x.Id)
-                .NotNull()
-                .GreaterThanOrEqualTo(1);
+                .GreaterThanOrEqualTo(1).WithMessage("The theme's identifier must be positive and not zero.");
+
+            RuleFor(x => x.DictionaryId)
+                .GreaterThanOrEqualTo(1).WithMessage("The dictionary's identifier must be positive and not zero.");
         }
     }
 }

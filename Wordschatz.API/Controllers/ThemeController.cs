@@ -3,23 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wordschatz.Application.Dictionaries.Commands;
-using Wordschatz.Application.Dictionaries.Mapper;
-using Wordschatz.Application.Dictionaries.Queries;
+using System.Threading.Tasks;
+using Wordschatz.Application.Themes.Commands;
+using Wordschatz.Application.Themes.Mappers;
+using Wordschatz.Application.Themes.Queries;
 using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
-using Wordschatz.Domain.Models.Dictionaries;
+using Wordschatz.Domain.Models.Themes;
 
-// Todo: Replace try/catch statements with the other way to message errors.
 namespace Wordschatz.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/")]
-    public class DictionaryController : ControllerBase
+    [Route("api/dictionary/{dictid}/theme")]
+    public class ThemeController : ControllerBase
     {
         private readonly ICommandBus _commandBus;
         private readonly IQueryBus _queryBus;
-        public DictionaryController(ICommandBus commandBus, IQueryBus queryBus)
+
+        public ThemeController(ICommandBus commandBus, IQueryBus queryBus)
         {
             _commandBus = commandBus;
             _queryBus = queryBus;
@@ -29,14 +30,14 @@ namespace Wordschatz.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get([FromRoute]long id)
+        public IActionResult Get([FromRoute] long id, [FromRoute] long dictid)
         {
             try
             {
-                Dictionary result = _queryBus.Send<DictionaryGetByIdQuery, Dictionary>( new DictionaryGetByIdQuery(id) );
-                if (result == null) return NotFound(null);
+                Theme result = _queryBus.Send<ThemeGetByIdQuery, Theme>(new ThemeGetByIdQuery(id, dictid));
+                if (result == null) return NotFound(result);
 
-                return Ok(DictionaryMapper.MapToReadModel(result));
+                return Ok(ThemeMapper.MapToReadModel(result));
             }
             catch (Exception e)
             {
@@ -49,12 +50,12 @@ namespace Wordschatz.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetMany([FromQuery]int amount = 20, [FromQuery]int pages = 1)
+        public IActionResult GetMany([FromRoute] long dictid, [FromQuery] int amount = 20, [FromQuery] int pages = 1)
         {
             try
             {
-                IEnumerable<Dictionary> dicts = _queryBus.Send<DictionaryGetManyQuery, List<Dictionary>>(new DictionaryGetManyQuery(amount, pages));
-                var result = dicts.Select(x => DictionaryMapper.MapToReadModel(x)) ?? null;
+                IEnumerable<Theme> dicts = _queryBus.Send<ThemeGetManyQuery, List<Theme>>(new ThemeGetManyQuery(dictid, amount, pages));
+                var result = dicts.Select(x => ThemeMapper.MapToReadModel(x)) ?? null;
                 return Ok(result);
             }
             catch (Exception e)
@@ -64,16 +65,18 @@ namespace Wordschatz.API.Controllers
             }
         }
 
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Create([FromBody] CreateDictionaryCommand command)
+        public IActionResult Create([FromBody] CreateThemeCommand command, [FromRoute] long dictid)
         {
             try
             {
+                command.DictionaryId = dictid;
                 _commandBus.Send(command);
-                long dictionaryId = command.DictionaryId;
-                return RedirectToAction("Get", new { id = dictionaryId });
+                long themeId = command.Id;
+                return RedirectToAction("Get", new { id = themeId, dictid = dictid });
             }
             catch (Exception e)
             {
@@ -85,11 +88,12 @@ namespace Wordschatz.API.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Put([FromRoute]long id, [FromBody] EditDictionaryCommand command)
+        public IActionResult Put([FromRoute] long id, [FromRoute] long dictid, [FromBody] EditThemeCommand command)
         {
             try
             {
-                command.DictionaryId = id;
+                command.Id = id;
+                command.DictionaryId = dictid;
                 _commandBus.Send(command);
                 return Ok();
             }
@@ -101,11 +105,11 @@ namespace Wordschatz.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute]long id)
+        public IActionResult Delete([FromRoute] long id, [FromRoute] long dictid)
         {
             try
             {
-                _commandBus.Send( new DeleteDictionaryCommand(id) );
+                _commandBus.Send(new DeleteThemeCommand(id, dictid));
                 return Ok();
             }
             catch (Exception e)

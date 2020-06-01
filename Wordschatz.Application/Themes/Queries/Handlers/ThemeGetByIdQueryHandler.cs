@@ -26,9 +26,16 @@ namespace Wordschatz.Application.Themes.Queries.Handlers
             if (query == null)
                 throw new ArgumentNullException(nameof(query));
 
+            var result = _validator.Validate(query);
+
+            if (!result.IsValid)
+            {
+                return null;
+            }
+
             Theme theme = (from t in _dbContext.Themes
-                          where t.Id == query.Id && t.DictionaryId == query.DictionaryId
-                          select t).Single();
+                           where t.Id == query.Id && t.DictionaryId == query.DictionaryId
+                           select t).SingleOrDefault();
 
             return theme;
         }

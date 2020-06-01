@@ -21,6 +21,8 @@ namespace Wordschatz.Domain.Models.Themes
 
         public Theme()
         {
+            Words = new List<Word>();
+            Marks = new List<ThemeMarks>();
         }
 
         public Theme(ThemeBuilder builder)

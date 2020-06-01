@@ -26,12 +26,13 @@ namespace Wordschatz.Infrastructure.Configuration
 			builder.HasOne(theme => theme.Dictionary)
 				.WithMany(dict => dict.Themes)
 				.HasForeignKey(theme => theme.DictionaryId)
-				.IsRequired();
+				.IsRequired()
+				.OnDelete(DeleteBehavior.Restrict);
 
 			builder.HasOne(theme => theme.Parent)
-				.WithOne()
-				.HasForeignKey<Theme>(theme => theme.ParentId)
-				.IsRequired(false);
+				.WithMany()
+				.IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
 
 			builder.HasMany(theme => theme.Words)
 				.WithOne(words => words.Theme)

@@ -20,11 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Words\CommandHandlers\" />
-    <Folder Include="Words\QueryHandlers\" />
-    <Folder Include="Words\Commands\" />
+    <Folder Include="Words\Commands\Handlers\" />
+    <Folder Include="Words\Commands\Validators\" />
+    <Folder Include="Words\Queries\Handlers\" />
     <Folder Include="Words\Mappers\" />
-    <Folder Include="Words\Queries\" />
+    <Folder Include="Words\Queries\Validators\" />
   </ItemGroup>
 
 </Project>

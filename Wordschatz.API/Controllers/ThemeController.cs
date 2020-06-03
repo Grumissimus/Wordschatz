@@ -60,8 +60,6 @@ namespace Wordschatz.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Create([FromBody] CreateThemeCommand command, [FromRoute] long dictid)
         {
             command.DictionaryId = dictid;
@@ -78,8 +76,6 @@ namespace Wordschatz.API.Controllers
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Put([FromRoute] long id, [FromRoute] long dictid, [FromBody] EditThemeCommand command)
         {
             command.Id = id;

@@ -7,7 +7,6 @@ namespace Wordschatz.Application.Words.ReadModels
         public long Id { get; set; }
         public string Term { get; set; }
         public string Meaning { get; set; }
-        public long ThemeId { get; set; }
         public List<string> Marks { get; set; }
     }
 }

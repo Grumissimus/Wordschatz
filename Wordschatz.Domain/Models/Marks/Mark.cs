@@ -20,6 +20,9 @@ namespace Wordschatz.Domain.Models.Marks
 
         public Mark()
         {
+            Words = new List<WordMarks>();
+            Themes = new List<ThemeMarks>();
+            Dictionaries = new List<DictionaryMarks>();
         }
 
         public Mark(long id, string name, string description)
@@ -29,6 +32,7 @@ namespace Wordschatz.Domain.Models.Marks
             Description = new Description(description);
             Words = new List<WordMarks>();
             Themes = new List<ThemeMarks>();
+            Dictionaries = new List<DictionaryMarks>();
         }
 
         public void ChangeName(string name)

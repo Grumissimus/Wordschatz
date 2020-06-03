@@ -88,7 +88,12 @@ namespace Wordschatz.Domain.Models.Themes
 
         public void ChangeParent(Theme newParent)
         {
-            Parent = newParent ?? throw new ArgumentNullException(nameof(newParent));
+            if(newParent == null)
+            {
+                Parent = null;
+                return;
+            }
+            Parent = newParent;
             ParentId = newParent.Id;
         }
     }

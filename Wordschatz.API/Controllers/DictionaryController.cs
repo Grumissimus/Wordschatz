@@ -9,7 +9,6 @@ using Wordschatz.Common.Queries;
 using Wordschatz.Common.Results;
 using Wordschatz.Domain.Models.Dictionaries;
 
-// Todo: Replace try/catch statements with the other way to message errors.
 namespace Wordschatz.API.Controllers
 {
     [ApiController]

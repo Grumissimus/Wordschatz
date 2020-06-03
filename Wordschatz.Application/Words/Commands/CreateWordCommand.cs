@@ -4,10 +4,18 @@ namespace Wordschatz.Application.Words.Commands
 {
     public class CreateWordCommand : ICommand
     {
-        public string Term { get; protected set; }
-        public string Meaning { get; protected set; }
-        public long ThemeId { get; protected set; }
-        public long DictionaryId { get; protected set; }
+        public string Term { get; set; }
+        public string Meaning { get; set; }
+        public long ThemeId { get; set; }
+        public long DictionaryId { get; set; }
+
+        //Output value
+        public long Id { get; protected set; }
+
+        public CreateWordCommand()
+        {
+
+        }
 
         public CreateWordCommand(string term, string meaning, long themeId, long dictionaryId)
         {

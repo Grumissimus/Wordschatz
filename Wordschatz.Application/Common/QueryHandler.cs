@@ -47,6 +47,14 @@ namespace Wordschatz.Application.Common
 
         public IResult<TResult> Execute(TQuery query)
         {
+            /*** 
+             * The null assignment is done here, because command handlers are declared as
+             * life-time scoped objects. If it weren't be assigned to null, API would stop
+             * working properly after the first request, because the object would still have
+             * the result of previous request.
+            ***/
+            _result = null;
+
             Validate(query);
             if (_result != null) return _result;
             Handle(query);

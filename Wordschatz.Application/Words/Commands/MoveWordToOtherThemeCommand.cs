@@ -8,6 +8,11 @@ namespace Wordschatz.Application.Words.Commands
         public long ThemeId { get; set; }
         public long DictionaryId { get; protected set; }
 
+        public MoveWordToOtherThemeCommand()
+        {
+
+        }
+
         public MoveWordToOtherThemeCommand(long id, long themeId)
         {
             Id = id;

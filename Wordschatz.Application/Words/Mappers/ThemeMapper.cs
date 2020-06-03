@@ -11,14 +11,13 @@ namespace Wordschatz.Application.Words.Mappers
         public static WordReadModel MapToReadModel(Word word)
         {
             if (word == null)
-                throw new ArgumentException("Word cannot be a null value");
+                return default;
 
             WordReadModel wordReadModel = new WordReadModel
             {
                 Id = word.Id,
                 Term = word.Term,
                 Meaning = word.Meaning,
-                ThemeId = word.ThemeId,
                 Marks = new List<string>()
             };
 

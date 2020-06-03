@@ -3,6 +3,7 @@ using System.Linq;
 using Wordschatz.Application.Common;
 using Wordschatz.Common.Results;
 using Wordschatz.Domain.Models.Themes;
+using Wordschatz.Domain.Models.Words;
 using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Themes.Commands.Handlers
@@ -22,6 +23,11 @@ namespace Wordschatz.Application.Themes.Commands.Handlers
             if (theme == null)
                 _result = new InvalidResult()
                     .WithError("No theme of this id has been found.");
+
+            foreach(Word word in theme.Words)
+            {
+                _dbContext.Words.Remove(word);
+            }
 
             _dbContext.Themes.Remove(theme);
             _dbContext.SaveChanges();

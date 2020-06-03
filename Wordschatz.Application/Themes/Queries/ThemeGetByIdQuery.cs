@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Wordschatz.Common.Queries;
 using Wordschatz.Domain.Models.Themes;
-using Wordschatz.Common.Queries;
 
 namespace Wordschatz.Application.Themes.Queries
 {
@@ -10,6 +7,7 @@ namespace Wordschatz.Application.Themes.Queries
     {
         public long Id { get; set; }
         public long DictionaryId { get; set; }
+
         public ThemeGetByIdQuery(long id, long did)
         {
             Id = id;

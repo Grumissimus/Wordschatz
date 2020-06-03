@@ -2,14 +2,9 @@
 using Autofac.Extensions.DependencyInjection;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
-using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.API
 {

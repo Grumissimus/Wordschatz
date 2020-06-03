@@ -1,39 +1,21 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Application.Dictionaries.Queries;
-using Wordschatz.Application.Dictionaries.Queries.Validators;
-using Wordschatz.Common.Queries;
+using Wordschatz.Application.Common;
+using Wordschatz.Common.Results;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Dictionaries.Queries.Handlers
 {
-    public class DictionaryGetByIdQueryHandler : IQueryHandler<DictionaryGetByIdQuery, Dictionary>
+    public class DictionaryGetByIdQueryHandler : QueryHandler<DictionaryGetByIdQuery, Dictionary>
     {
-        private readonly WordschatzContext _dbContext;
-        private readonly IValidator<DictionaryGetByIdQuery> _validator;
-        public DictionaryGetByIdQueryHandler(WordschatzContext dbContext, IValidator<DictionaryGetByIdQuery> validator)
+        public DictionaryGetByIdQueryHandler(WordschatzContext dbContext, IValidator<DictionaryGetByIdQuery> validator) : base(dbContext, validator)
         {
-            _dbContext = dbContext;
-            _validator = validator;
         }
-        public Dictionary Execute(DictionaryGetByIdQuery query)
+
+        public override void Handle(DictionaryGetByIdQuery query)
         {
-            if (query == null)
-                throw new ArgumentNullException(nameof(query));
-
-            var result = _validator.Validate(query);
-
-            if (!result.IsValid)
-            {
-                return null;
-            }
-
             Dictionary dict = _dbContext.Dictionaries.Find(query.Id);
-
-            return dict;
+            _result = new SuccessResult<Dictionary>(dict);
         }
     }
 }

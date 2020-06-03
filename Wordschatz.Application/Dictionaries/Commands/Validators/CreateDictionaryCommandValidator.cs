@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Data;
 using Wordschatz.Domain.Models.Dictionaries;
 
 namespace Wordschatz.Application.Dictionaries.Commands.Validators

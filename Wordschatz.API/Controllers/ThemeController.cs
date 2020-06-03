@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Wordschatz.Application.Themes.Commands;
 using Wordschatz.Application.Themes.Mappers;
 using Wordschatz.Application.Themes.Queries;
 using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
+using Wordschatz.Common.Results;
 using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.API.Controllers
@@ -27,62 +26,55 @@ namespace Wordschatz.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get([FromRoute] long id, [FromRoute] long dictid)
         {
-            try
-            {
-                Theme result = _queryBus.Send<ThemeGetByIdQuery, Theme>(new ThemeGetByIdQuery(id, dictid));
-                if (result == null) return NotFound(result);
+            IResult<Theme> result = _queryBus.Send<ThemeGetByIdQuery, Theme>(new ThemeGetByIdQuery(id, dictid));
 
-                return Ok(ThemeMapper.MapToReadModel(result));
-            }
-            catch (Exception e)
+            if (!result.IsValid())
             {
-                Console.Error.Write(e);
-                return BadRequest();
+                var Error = (InvalidResult<Theme>)result;
+                return BadRequest(Error.Errors);
             }
+
+            var Success = (SuccessResult<Theme>)result;
+            Theme theme = Success.Data;
+
+            return Ok(ThemeMapper.MapToReadModel(theme));
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMany([FromRoute] long dictid, [FromQuery] int amount = 20, [FromQuery] int pages = 1)
         {
-            try
-            {
-                IEnumerable<Theme> dicts = _queryBus.Send<ThemeGetManyQuery, List<Theme>>(new ThemeGetManyQuery(dictid, amount, pages));
-                var result = dicts.Select(x => ThemeMapper.MapToReadModel(x)) ?? null;
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                Console.Error.Write(e);
-                return BadRequest();
-            }
-        }
+            IResult<List<Theme>> result = _queryBus.Send<ThemeGetManyQuery, List<Theme>>(new ThemeGetManyQuery(dictid, amount, pages));
 
+            if (!result.IsValid())
+            {
+                var Error = (InvalidResult<List<Theme>>)result;
+                return BadRequest(Error.Errors);
+            }
+
+            var Success = (SuccessResult<List<Theme>>)result;
+            List<Theme> themes = Success.Data;
+
+            return Ok(themes.Select(x => ThemeMapper.MapToReadModel(x)));
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Create([FromBody] CreateThemeCommand command, [FromRoute] long dictid)
         {
-            try
+            command.DictionaryId = dictid;
+            var result = _commandBus.Send(command);
+
+            if (!result.IsValid())
             {
-                command.DictionaryId = dictid;
-                _commandBus.Send(command);
-                long themeId = command.Id;
-                return RedirectToAction("Get", new { id = themeId, dictid = dictid });
+                var Error = (InvalidResult<List<Theme>>)result;
+                return BadRequest(Error.Errors);
             }
-            catch (Exception e)
-            {
-                Console.Error.Write(e);
-                return BadRequest();
-            }
+
+            long themeId = command.Id;
+            return RedirectToAction("Get", new { id = themeId, dictid = dictid });
         }
 
         [HttpPut("{id}")]
@@ -90,33 +82,30 @@ namespace Wordschatz.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Put([FromRoute] long id, [FromRoute] long dictid, [FromBody] EditThemeCommand command)
         {
-            try
+            command.Id = id;
+            command.DictionaryId = dictid;
+            var result = _commandBus.Send(command);
+
+            if (!result.IsValid())
             {
-                command.Id = id;
-                command.DictionaryId = dictid;
-                _commandBus.Send(command);
-                return Ok();
+                var Error = (InvalidResult<List<Theme>>)result;
+                return BadRequest(Error.Errors);
             }
-            catch (Exception e)
-            {
-                Console.Error.Write(e);
-                return BadRequest();
-            }
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] long id, [FromRoute] long dictid)
         {
-            try
+            var result = _commandBus.Send(new DeleteThemeCommand(id, dictid));
+            if (!result.IsValid())
             {
-                _commandBus.Send(new DeleteThemeCommand(id, dictid));
-                return Ok();
+                var Error = (InvalidResult<List<Theme>>)result;
+                return BadRequest(Error.Errors);
             }
-            catch (Exception e)
-            {
-                Console.Error.Write(e);
-                return BadRequest();
-            }
+
+            return Ok();
         }
     }
 }

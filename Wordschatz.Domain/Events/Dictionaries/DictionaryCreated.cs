@@ -1,7 +1,8 @@
 ﻿using Wordschatz.Common.Events;
 using DictionaryModel = Wordschatz.Domain.Models.Dictionaries.Dictionary;
 
-namespace Wordschatz.Domain.Events.Dictionaries {
+namespace Wordschatz.Domain.Events.Dictionaries
+{
     public class DictionaryCreated : IEvent
     {
         public readonly DictionaryModel Dictionary;

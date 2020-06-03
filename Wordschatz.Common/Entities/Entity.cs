@@ -9,11 +9,13 @@ namespace Wordschatz.Common.Entities
     public abstract class Entity
     {
         private long _id;
-        public long Id {
 
+        public long Id
+        {
             get => _id;
 
-            protected set {
+            protected set
+            {
                 if (value < 0)
                 {
                     throw new ArgumentException("The identifier cannot be a negative number");
@@ -22,6 +24,7 @@ namespace Wordschatz.Common.Entities
                 _id = value;
             }
         }
+
         protected virtual object Actual => this;
 
         public override bool Equals(object obj)

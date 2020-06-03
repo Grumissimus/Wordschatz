@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Wordschatz.Application.Themes.ReadModels;
 using Wordschatz.Domain.Models;
 using Wordschatz.Domain.Models.Themes;
@@ -23,7 +22,7 @@ namespace Wordschatz.Application.Themes.Mappers
                 Marks = new List<string>()
             };
 
-            foreach(ThemeMarks tm in theme.Marks)
+            foreach (ThemeMarks tm in theme.Marks)
             {
                 themeRead.Marks.Add(tm.Mark.Name.Value);
             }

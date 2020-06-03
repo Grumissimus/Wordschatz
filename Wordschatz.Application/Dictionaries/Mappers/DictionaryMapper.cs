@@ -21,7 +21,7 @@ namespace Wordschatz.Application.Dictionaries.Mapper
                 Marks = new List<string>()
             };
 
-            foreach ( DictionaryMarks dm in dictionary.Marks)
+            foreach (DictionaryMarks dm in dictionary.Marks)
             {
                 dictRead.Marks.Add(dm.Mark.Name.Value);
             }

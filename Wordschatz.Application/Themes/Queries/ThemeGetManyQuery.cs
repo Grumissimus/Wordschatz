@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Domain.Models.Themes;
+﻿using System.Collections.Generic;
 using Wordschatz.Common.Queries;
+using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.Application.Themes.Queries
 {

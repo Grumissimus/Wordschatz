@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Themes;
-using Wordschatz.Domain.Models.Words;
 using Wordschatz.Domain.Models.ValueObjects;
+using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Marks
 {
@@ -48,6 +48,7 @@ namespace Wordschatz.Domain.Models.Marks
 
             Words.Add(new WordMarks(this, word));
         }
+
         public void AddTheme(Theme theme)
         {
             if (theme == null)

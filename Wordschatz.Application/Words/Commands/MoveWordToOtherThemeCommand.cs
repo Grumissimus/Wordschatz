@@ -2,11 +2,13 @@
 
 namespace Wordschatz.Application.Words.Commands
 {
-    public class ChangeWordsThemeCommand : ICommand
+    public class MoveWordToOtherThemeCommand : ICommand
     {
         public long Id { get; set; }
         public long ThemeId { get; set; }
-        public ChangeWordsThemeCommand(long id, long themeId)
+        public long DictionaryId { get; protected set; }
+
+        public MoveWordToOtherThemeCommand(long id, long themeId)
         {
             Id = id;
             ThemeId = themeId;

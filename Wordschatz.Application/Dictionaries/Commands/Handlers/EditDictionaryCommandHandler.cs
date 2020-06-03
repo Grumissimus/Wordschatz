@@ -1,40 +1,21 @@
 ﻿using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using System;
-using Wordschatz.Application.Dictionaries.Commands;
-using Wordschatz.Application.Dictionaries.Commands.Validators;
-using Wordschatz.Common.Commands;
+using Wordschatz.Application.Common;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Dictionaries.Commands.Handlers
 {
-    public class EditDictionaryCommandHandler : ICommandHandler<EditDictionaryCommand>
+    public class EditDictionaryCommandHandler : CommandHandler<EditDictionaryCommand>
     {
-        private readonly WordschatzContext _dbContext;
-        private readonly IValidator<EditDictionaryCommand> _validator;
-
-        public EditDictionaryCommandHandler(WordschatzContext dbContext, IValidator<EditDictionaryCommand> validator)
+        public EditDictionaryCommandHandler(WordschatzContext dbContext, IValidator<EditDictionaryCommand> validator) : base(dbContext, validator)
         {
-            _dbContext = dbContext;
-            _validator = validator;
         }
 
-        public void Execute(EditDictionaryCommand command)
+        public override void Handle(EditDictionaryCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
-
-            var result = _validator.Validate(command);
-
-            if (!result.IsValid)
-            {
-                return;
-            }
-
             Dictionary oldDict = _dbContext.Dictionaries.Find(command.DictionaryId);
 
-            if(oldDict != null)
+            if (oldDict != null)
                 _dbContext.Dictionaries.Remove(oldDict);
 
             Dictionary newDict = new DictionaryBuilder()

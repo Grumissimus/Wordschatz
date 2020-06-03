@@ -2,7 +2,7 @@
 
 namespace Wordschatz.Application.Themes.Queries.Validators
 {
-    class ThemesGetByIdQueryValidator : AbstractValidator<ThemeGetByIdQuery>
+    internal class ThemesGetByIdQueryValidator : AbstractValidator<ThemeGetByIdQuery>
     {
         public ThemesGetByIdQueryValidator()
         {

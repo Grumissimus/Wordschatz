@@ -1,23 +1,21 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Wordschatz.Common.Commands;
+using Wordschatz.Common.Results;
 
 namespace Wordschatz.API.Buses
 {
     public class CommandBus : ICommandBus
     {
-        public void Send<T>(T command) where T : ICommand
+        public IResult Send<T>(T command) where T : ICommand
         {
             var handler = IoC.Container.Resolve<ICommandHandler<T>>();
 
-            if(handler == null)
+            if (handler == null)
             {
-                throw new Exception($"No handler for command {nameof(command)} has been found");
+                return new InvalidResult().WithError($"No handler for command {nameof(command)} has been found");
             }
-            handler.Execute(command);
+
+            return handler.Execute(command);
         }
     }
 }

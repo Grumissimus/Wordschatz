@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Wordschatz.Common.Entities;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
-using Wordschatz.Domain.Models.Words;
 using Wordschatz.Domain.Models.ValueObjects;
+using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Themes
 {
@@ -64,7 +64,8 @@ namespace Wordschatz.Domain.Models.Themes
 
         public void ChangeName(string newName)
         {
-            try { 
+            try
+            {
                 Name nName = new Name(newName);
                 Name = nName;
             }

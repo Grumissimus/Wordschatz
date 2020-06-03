@@ -1,44 +1,27 @@
-﻿using System;
+﻿using FluentValidation;
 using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Common.Queries;
-using Wordschatz.Domain.Models.Themes;
-using Wordschatz.Application.Themes.Queries;
-using Wordschatz.Infrastructure.Context;
 using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using FluentValidation;
+using Wordschatz.Application.Common;
+using Wordschatz.Common.Results;
+using Wordschatz.Domain.Models.Themes;
+using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Themes.Queries.Handlers
 {
-    public class ThemeGetManyQueryHandler : IQueryHandler<ThemeGetManyQuery, List<Theme>>
+    public class ThemeGetManyQueryHandler : QueryHandler<ThemeGetManyQuery, List<Theme>>
     {
-        private readonly WordschatzContext _dbContext;
-        private readonly IValidator<ThemeGetManyQuery> _validator;
-
-        public ThemeGetManyQueryHandler(WordschatzContext dbContext, IValidator<ThemeGetManyQuery> validator)
+        public ThemeGetManyQueryHandler(WordschatzContext dbContext, IValidator<ThemeGetManyQuery> validator) : base(dbContext, validator)
         {
-            _dbContext = dbContext;
-            _validator = validator;
         }
 
-        public List<Theme> Execute(ThemeGetManyQuery query)
+        public override void Handle(ThemeGetManyQuery query)
         {
-            if (query == null)
-                throw new ArgumentNullException(nameof(query));
-
-            var result = _validator.Validate(query);
-
-            if (!result.IsValid)
-            {
-                return null;
-            }
-
-            List<Theme> dict = (from d in _dbContext.Themes where d.DictionaryId == query.DictionaryId select d).ToList();
+            List<Theme> themes = (from d in _dbContext.Themes where d.DictionaryId == query.DictionaryId select d).ToList();
             int skipNum = (query.PageNum > 1 ? query.PageNum - 1 : 0) * query.Amount;
-            dict.Skip(skipNum).Take(query.Amount);
 
-            return dict;
+            themes.Skip(skipNum).Take(query.Amount);
+
+            _result = new SuccessResult<List<Theme>>(themes);
         }
     }
 }

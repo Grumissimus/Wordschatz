@@ -34,6 +34,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
             this.Id = id;
             return this;
         }
+
         public IDictionaryBuilder AddMark(Mark mark)
         {
             if (mark == null)

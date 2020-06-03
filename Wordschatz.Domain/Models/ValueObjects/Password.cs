@@ -11,9 +11,9 @@ namespace Wordschatz.Domain.Models.ValueObjects
         public string Hash { get; private set; }
         public static readonly int SaltLength = 256;
         public static readonly int HashLength = 256;
+
         private Password()
         {
-
         }
 
         public static implicit operator Password(string pass) => new Password(pass);

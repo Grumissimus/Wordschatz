@@ -1,5 +1,4 @@
 ﻿using Wordschatz.Common.Events;
-using Wordschatz.Domain.Models.Themes;
 using MTheme = Wordschatz.Domain.Models.Themes.Theme;
 
 namespace Wordschatz.Domain.Events.Dictionaries

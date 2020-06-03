@@ -2,7 +2,7 @@
 
 namespace Wordschatz.Application.Dictionaries.Queries.Validators
 {
-    class DictionaryGetByIdQueryValidator : AbstractValidator<DictionaryGetByIdQuery>
+    internal class DictionaryGetByIdQueryValidator : AbstractValidator<DictionaryGetByIdQuery>
     {
         public DictionaryGetByIdQueryValidator()
         {

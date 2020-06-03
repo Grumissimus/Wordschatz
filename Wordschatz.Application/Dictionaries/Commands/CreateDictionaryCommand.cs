@@ -1,5 +1,4 @@
-﻿using System;
-using Wordschatz.Common.Commands;
+﻿using Wordschatz.Common.Commands;
 using Wordschatz.Domain.Models.Dictionaries;
 
 namespace Wordschatz.Application.Dictionaries.Commands

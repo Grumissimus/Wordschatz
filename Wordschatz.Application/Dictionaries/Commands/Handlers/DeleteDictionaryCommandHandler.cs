@@ -1,45 +1,31 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Application.Dictionaries.Commands;
-using Wordschatz.Application.Dictionaries.Commands.Validators;
-using Wordschatz.Common.Commands;
+using Wordschatz.Application.Common;
+using Wordschatz.Common.Results;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Dictionaries.Commands.Handlers
 {
-    public class DeleteDictionaryCommandHandler : ICommandHandler<DeleteDictionaryCommand>
+    public class DeleteDictionaryCommandHandler : CommandHandler<DeleteDictionaryCommand>
     {
-        private readonly WordschatzContext _dbContext;
-        private readonly IValidator<DeleteDictionaryCommand> _validator;
-
-        public DeleteDictionaryCommandHandler(WordschatzContext dbContext, IValidator<DeleteDictionaryCommand> validator)
+        public DeleteDictionaryCommandHandler(WordschatzContext dbContext, IValidator<DeleteDictionaryCommand> validator) : base(dbContext, validator)
         {
-            _dbContext = dbContext;
-            _validator = validator;
         }
 
-        public void Execute(DeleteDictionaryCommand command)
+        public override void Handle(DeleteDictionaryCommand command)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
-
-            var result = _validator.Validate(command);
-
-            if (!result.IsValid)
-            {
-                return;
-            }
-
             Dictionary dict = _dbContext.Dictionaries.Find(command.Id);
 
             if (dict == null)
+            {
+                _result = new InvalidResult()
+                    .WithError("No dictionary of this id has been found");
                 return;
+            }
 
             _dbContext.Dictionaries.Remove(dict);
             _dbContext.SaveChanges();
+            _result = new SuccessResult();
         }
     }
 }

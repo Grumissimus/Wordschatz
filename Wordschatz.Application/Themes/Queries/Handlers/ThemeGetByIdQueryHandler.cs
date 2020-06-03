@@ -1,43 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Wordschatz.Common.Queries;
-using Wordschatz.Domain.Models.Themes;
-using Wordschatz.Application.Themes.Queries;
-using Wordschatz.Infrastructure.Context;
+﻿using FluentValidation;
 using System.Linq;
-using FluentValidation;
+using Wordschatz.Application.Common;
+using Wordschatz.Common.Results;
+using Wordschatz.Domain.Models.Themes;
+using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.Application.Themes.Queries.Handlers
 {
-    public class ThemeGetByIdQueryHandler : IQueryHandler<ThemeGetByIdQuery, Theme>
+    public class ThemeGetByIdQueryHandler : QueryHandler<ThemeGetByIdQuery, Theme>
     {
-        private readonly WordschatzContext _dbContext;
-        private readonly IValidator<ThemeGetByIdQuery> _validator;
-
-        public ThemeGetByIdQueryHandler(WordschatzContext dbContext, IValidator<ThemeGetByIdQuery> validator)
+        public ThemeGetByIdQueryHandler(WordschatzContext dbContext, IValidator<ThemeGetByIdQuery> validator) : base(dbContext, validator)
         {
-            _dbContext = dbContext;
-            _validator = validator;
         }
 
-        public Theme Execute(ThemeGetByIdQuery query)
+        public override void Handle(ThemeGetByIdQuery query)
         {
-            if (query == null)
-                throw new ArgumentNullException(nameof(query));
-
-            var result = _validator.Validate(query);
-
-            if (!result.IsValid)
-            {
-                return null;
-            }
-
             Theme theme = (from t in _dbContext.Themes
                            where t.Id == query.Id && t.DictionaryId == query.DictionaryId
                            select t).SingleOrDefault();
 
-            return theme;
+            _result = new SuccessResult<Theme>(theme);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Wordschatz.Domain.Tests.ValueObjects
         public void Name_Positive(string name)
         {
             Name myName = new Name(name);
-            Assert.AreEqual( (string)myName, name);
+            Assert.AreEqual((string)myName, name);
         }
 
         [TestCase(null)]
@@ -67,7 +67,7 @@ namespace Wordschatz.Domain.Tests.ValueObjects
         {
             Password pass = "mySecretPassword";
 
-            Assert.IsTrue( pass.ValidatePassword("mySecretPassword") );
+            Assert.IsTrue(pass.ValidatePassword("mySecretPassword"));
         }
 
         [Test]

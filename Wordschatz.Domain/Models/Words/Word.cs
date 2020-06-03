@@ -17,6 +17,16 @@ namespace Wordschatz.Domain.Models.Words
 
         public Word()
         {
+            Marks = new List<WordMarks>();
+        }
+
+        public Word(string term, string meaning, Theme theme, List<WordMarks> marks = null)
+        {
+            Term = term;
+            Meaning = meaning;
+            Theme = theme;
+            ThemeId = theme.Id;
+            Marks = marks ?? new List<WordMarks>();
         }
 
         public void ChangeTerm(string term)

@@ -1,5 +1,4 @@
-﻿using System;
-using Wordschatz.Common.Commands;
+﻿using Wordschatz.Common.Commands;
 
 namespace Wordschatz.Application.Themes.Commands
 {

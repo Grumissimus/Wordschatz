@@ -1,16 +1,14 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wordschatz.Infrastructure.Context;
-using MediatR;
-using Wordschatz.Common.Commands;
 using Wordschatz.API.Buses;
+using Wordschatz.Common.Commands;
 using Wordschatz.Common.Queries;
-using FluentValidation.AspNetCore;
-using FluentValidation;
+using Wordschatz.Infrastructure.Context;
 
 namespace Wordschatz.API
 {
@@ -26,10 +24,10 @@ namespace Wordschatz.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers()
                 .AddFluentValidation(
-                    fv => {
+                    fv =>
+                    {
                         fv.RegisterValidatorsFromAssemblyContaining<Startup>();
                     }
                 );

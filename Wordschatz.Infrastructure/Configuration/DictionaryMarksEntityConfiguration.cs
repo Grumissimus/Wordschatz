@@ -4,10 +4,10 @@ using Wordschatz.Domain.Models;
 
 namespace Wordschatz.Infrastructure.Configuration
 {
-	public class DictionaryMarksEntityConfiguration : IEntityTypeConfiguration<DictionaryMarks>
-	{
-		public void Configure(EntityTypeBuilder<DictionaryMarks> builder)
-		{
+    public class DictionaryMarksEntityConfiguration : IEntityTypeConfiguration<DictionaryMarks>
+    {
+        public void Configure(EntityTypeBuilder<DictionaryMarks> builder)
+        {
             builder.HasKey(a => new { a.DictionaryId, a.MarkId });
 
             builder.HasOne(b => b.Dictionary)
@@ -20,8 +20,7 @@ namespace Wordschatz.Infrastructure.Configuration
                 .HasForeignKey(a => a.MarkId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-			builder.ToTable("DictionaryMarks");
-		}
-	}
+            builder.ToTable("DictionaryMarks");
+        }
+    }
 }
-

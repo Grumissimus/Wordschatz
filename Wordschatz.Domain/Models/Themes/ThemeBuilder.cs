@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Wordschatz.Domain.Models.Dictionaries;
 using Wordschatz.Domain.Models.Marks;
-using Wordschatz.Domain.Models.Words;
 using Wordschatz.Domain.Models.ValueObjects;
+using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Themes
 {

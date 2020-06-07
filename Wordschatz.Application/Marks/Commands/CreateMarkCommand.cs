@@ -7,11 +7,16 @@ namespace Wordschatz.Application.Marks.Commands
 {
     public class CreateMarkCommand : ICommand
     {
+        public long DictionaryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public CreateMarkCommand(string name, string description)
+        //Output
+        public long Id { get; set; }
+
+        public CreateMarkCommand(long dictid, string name, string description)
         {
+            DictionaryId = dictid;
             Name = name;
             Description = description;
         }

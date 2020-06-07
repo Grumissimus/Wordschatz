@@ -14,7 +14,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         public Visibility Visibility { get; private set; }
         public EditPermission EditPermission { get; private set; }
         public Password Password { get; private set; }
-        public virtual List<DictionaryMarks> Marks { get; private set; }
+        public virtual List<Mark> Marks { get; private set; }
         public virtual List<Theme> Themes { get; private set; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
         private Dictionary()
         {
             Themes = new List<Theme>();
-            Marks = new List<DictionaryMarks>();
+            Marks = new List<Mark>();
         }
 
         public Dictionary(DictionaryBuilder builder)
@@ -35,11 +35,11 @@ namespace Wordschatz.Domain.Models.Dictionaries
             EditPermission = builder.EditPermission;
             Password = builder.Password;
             Themes = builder.Themes;
-            Marks = new List<DictionaryMarks>();
+            Marks = new List<Mark>();
 
             foreach (Mark m in builder.Marks)
             {
-                Marks.Add(new DictionaryMarks(m, this));
+                Marks.Add(m);
             }
         }
 
@@ -53,14 +53,14 @@ namespace Wordschatz.Domain.Models.Dictionaries
             if (mark == null)
                 throw new ArgumentNullException("The tag cannot be null.");
 
-            Marks.Add(new DictionaryMarks(mark, this));
+            Marks.Add(mark);
         }
         public void RemoveMark(Mark mark)
         {
             if (mark == null)
                 throw new ArgumentNullException(nameof(mark));
 
-            var markToRemove = Marks.Find(m => m.DictionaryId == m.Dictionary.Id && m.Mark.Id == mark.Id);
+            var markToRemove = Marks.Find(m => m.DictionaryId == m.Dictionary.Id && m.Id == mark.Id);
 
             if (markToRemove == null)
                 return;

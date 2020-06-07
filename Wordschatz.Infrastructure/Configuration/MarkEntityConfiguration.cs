@@ -32,6 +32,12 @@ namespace Wordschatz.Infrastructure.Configuration
                 }
             );
 
+            builder.HasOne(mark => mark.Dictionary)
+                .WithMany(dict => dict.Marks)
+                .HasForeignKey(mark => mark.DictionaryId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.ToTable("Marks");
         }
     }

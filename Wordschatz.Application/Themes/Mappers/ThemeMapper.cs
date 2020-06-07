@@ -11,7 +11,7 @@ namespace Wordschatz.Application.Themes.Mappers
         public static ThemeReadModel MapToReadModel(Theme theme)
         {
             if (theme == null)
-                throw new ArgumentException("Theme cannot be a null value");
+                return default;
 
             ThemeReadModel themeRead = new ThemeReadModel
             {

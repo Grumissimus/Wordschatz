@@ -57,6 +57,10 @@ namespace Wordschatz.Infrastructure.Configuration
                 .WithOne(theme => theme.Dictionary)
                 .HasForeignKey(theme => theme.DictionaryId);
 
+            builder.HasMany(dict => dict.Marks)
+                .WithOne(mark =>mark.Dictionary)
+                .HasForeignKey(mark => mark.DictionaryId);
+
             builder.ToTable("Dictionary");
         }
     }

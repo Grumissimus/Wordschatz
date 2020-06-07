@@ -7,11 +7,13 @@ namespace Wordschatz.Application.Marks.Commands
 {
     public class DeleteMarkCommand : ICommand
     {
-        public string MarkId { get; set; }
+        public long DictionaryId { get; set; }
+        public long Id { get; set; }
 
-        public DeleteMarkCommand(string markId)
+        public DeleteMarkCommand(long dictid, long markId)
         {
-            MarkId = markId;
+            DictionaryId = dictid;
+            Id = markId;
         }
     }
 }

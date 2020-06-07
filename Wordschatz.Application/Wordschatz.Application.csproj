@@ -19,11 +19,4 @@
     <ProjectReference Include="..\Wordschatz.Infrastructure\Wordschatz.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Marks\Commands\Handlers\" />
-    <Folder Include="Marks\Commands\Validators\" />
-    <Folder Include="Marks\Queries\Handlers\" />
-    <Folder Include="Marks\Queries\Validators\" />
-  </ItemGroup>
-
 </Project>

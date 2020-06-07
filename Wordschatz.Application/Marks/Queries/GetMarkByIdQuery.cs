@@ -6,12 +6,14 @@ using Wordschatz.Domain.Models.Marks;
 
 namespace Wordschatz.Application.Marks.Queries
 {
-    class GetMarkByIdQuery : IQuery<Mark>
+    public class GetMarkByIdQuery : IQuery<Mark>
     {
+        public long DictionaryId { get; set; }
         public long Id { get; set; }
 
-        public GetMarkByIdQuery(long id)
+        public GetMarkByIdQuery(long dictid, long id)
         {
+            DictionaryId = dictid;
             Id = id;
         }
     }

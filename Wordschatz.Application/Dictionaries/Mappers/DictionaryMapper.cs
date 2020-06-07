@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Wordschatz.Application.Dictionaries.ReadModels;
 using Wordschatz.Domain.Models;
 using Wordschatz.Domain.Models.Dictionaries;
+using Wordschatz.Domain.Models.Marks;
 
 namespace Wordschatz.Application.Dictionaries.Mapper
 {
@@ -21,9 +22,9 @@ namespace Wordschatz.Application.Dictionaries.Mapper
                 Marks = new List<string>()
             };
 
-            foreach (DictionaryMarks dm in dictionary.Marks)
+            foreach (Mark m in dictionary.Marks)
             {
-                dictRead.Marks.Add(dm.Mark.Name.Value);
+                dictRead.Marks.Add(m.Name);
             }
 
             dictRead.ThemeCount = dictionary.Themes.Count;

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Wordschatz.Application.Common;
 
 namespace Wordschatz.Application.Dictionaries.ReadModels
 {
     /// <summary>
     /// The read model of dictionary.
     /// </summary>
-    public class DictionaryReadModel
+    public class DictionaryReadModel : IReadModel
     {
         public long Id { get; set; }
         public string Name { get; set; }

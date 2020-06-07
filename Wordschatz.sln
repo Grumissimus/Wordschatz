@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.API", "Wordschatz.API\Wordschatz.API.csproj", "{F5E21FAD-80D5-4E5C-8936-D601EE90259C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordschatz.API.Tests", "Wordschatz.API.Tests\Wordschatz.API.Tests.csproj", "{5E85C1D7-D599-4E3F-9BB8-CC292E1A6084}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordschatz.API.Tests", "Wordschatz.API.Tests\Wordschatz.API.Tests.csproj", "{5E85C1D7-D599-4E3F-9BB8-CC292E1A6084}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

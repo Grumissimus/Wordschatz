@@ -10,7 +10,7 @@ namespace Wordschatz.Domain.Models.Marks
     /// <summary>
     /// A mark class.
     /// </summary>
-    public class Mark : EventSourcedAggregate, IMark
+    public class Mark : Entity
     {
         public Name Name { get; private set; }
         public Description Description { get; private set; }
@@ -43,22 +43,6 @@ namespace Wordschatz.Domain.Models.Marks
         public void ChangeDescription(string description)
         {
             Description = new Description(description);
-        }
-
-        public void AddWord(Word word)
-        {
-            if (word == null)
-                throw new ArgumentNullException("The word cannot be null.");
-
-            Words.Add(new WordMarks(this, word));
-        }
-
-        public void AddTheme(Theme theme)
-        {
-            if (theme == null)
-                throw new ArgumentNullException("The word cannot be null.");
-
-            Themes.Add(new ThemeMarks(this, theme));
         }
     }
 }

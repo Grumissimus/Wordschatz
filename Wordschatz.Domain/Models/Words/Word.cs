@@ -6,11 +6,10 @@ using Wordschatz.Domain.Models.Themes;
 
 namespace Wordschatz.Domain.Models.Words
 {
-    public class Word : EventSourcedAggregate, IWord
+    public class Word : EventSourcedAggregate
     {
         public string Term { get; protected set; }
         public string Meaning { get; protected set; }
-
         public long ThemeId { get; protected set; }
         public virtual Theme Theme { get; protected set; }
         public virtual List<WordMarks> Marks { get; protected set; }
@@ -55,6 +54,16 @@ namespace Wordschatz.Domain.Models.Words
                 throw new ArgumentException("The mark cannot be null.");
 
             Marks.Add(new WordMarks(mark, this));
+        }
+
+        public void RemoveMark(Mark mark)
+        {
+            if (mark == null)
+                throw new ArgumentException("The mark cannot be null.");
+
+            WordMarks wordMark = Marks.Find(x => x.Mark == mark);
+
+            Marks.Remove(wordMark);
         }
     }
 }

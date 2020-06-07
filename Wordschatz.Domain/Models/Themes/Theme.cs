@@ -8,7 +8,7 @@ using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Themes
 {
-    public class Theme : EventSourcedAggregate, ITheme
+    public class Theme : Entity
     {
         public Name Name { get; private set; }
         public long DictionaryId { get; private set; }

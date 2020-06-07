@@ -10,7 +10,7 @@ namespace Wordschatz.API.Tests
         }
 
         [Test]
-        public void API_ResolvesCommandHandler()
+        public void DictionaryController__()
         {
             Assert.Pass();
         }

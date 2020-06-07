@@ -7,7 +7,7 @@ using Wordschatz.Domain.Models.Words;
 
 namespace Wordschatz.Domain.Models.Themes
 {
-    public class ThemeBuilder : IThemeBuilder
+    public class ThemeBuilder
     {
         public long id;
         public Name name;
@@ -23,7 +23,7 @@ namespace Wordschatz.Domain.Models.Themes
             marks = new List<Mark>();
         }
 
-        public IThemeBuilder AddMark(Mark mark)
+        public ThemeBuilder AddMark(Mark mark)
         {
             if (mark == null)
                 throw new ArgumentNullException("The mark cannot be null.");
@@ -32,7 +32,7 @@ namespace Wordschatz.Domain.Models.Themes
             return this;
         }
 
-        public IThemeBuilder AddWord(Word word)
+        public ThemeBuilder AddWord(Word word)
         {
             if (word == null)
                 throw new ArgumentNullException("The word cannot be null.");
@@ -56,25 +56,25 @@ namespace Wordschatz.Domain.Models.Themes
             return new Theme(this);
         }
 
-        public IThemeBuilder SetDictionary(Dictionary dictionary)
+        public ThemeBuilder SetDictionary(Dictionary dictionary)
         {
             this.dictionary = dictionary ?? throw new ArgumentNullException("The dictionary cannot be null.");
             return this;
         }
 
-        public IThemeBuilder SetId(long id)
+        public ThemeBuilder SetId(long id)
         {
             this.id = id;
             return this;
         }
 
-        public IThemeBuilder SetName(string name)
+        public ThemeBuilder SetName(string name)
         {
             this.name = new Name(name);
             return this;
         }
 
-        public IThemeBuilder SetParent(Theme parent)
+        public ThemeBuilder SetParent(Theme parent)
         {
             if (parent == null)
             {

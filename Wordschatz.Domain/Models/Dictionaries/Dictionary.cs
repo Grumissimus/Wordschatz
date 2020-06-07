@@ -7,7 +7,7 @@ using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Dictionaries
 {
-    public class Dictionary : EventSourcedAggregate, IDictionary
+    public class Dictionary : Entity
     {
         public Name Name { get; private set; }
         public Description Description { get; private set; }
@@ -55,6 +55,18 @@ namespace Wordschatz.Domain.Models.Dictionaries
 
             Marks.Add(new DictionaryMarks(mark, this));
         }
+        public void RemoveMark(Mark mark)
+        {
+            if (mark == null)
+                throw new ArgumentNullException(nameof(mark));
+
+            var markToRemove = Marks.Find(m => m.DictionaryId == m.Dictionary.Id && m.Mark.Id == mark.Id);
+
+            if (markToRemove == null)
+                return;
+
+            Marks.Remove(markToRemove);
+        }
 
         public void AddTheme(Theme theme)
         {
@@ -72,17 +84,5 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Themes.Remove(theme);
         }
 
-        public void RemoveMark(Mark mark)
-        {
-            if (mark == null)
-                throw new ArgumentNullException(nameof(mark));
-
-            var markToRemove = Marks.Find(m => m.DictionaryId == m.Dictionary.Id && m.Mark.Id == mark.Id);
-
-            if (markToRemove == null)
-                return;
-
-            Marks.Remove(markToRemove);
-        }
     }
 }

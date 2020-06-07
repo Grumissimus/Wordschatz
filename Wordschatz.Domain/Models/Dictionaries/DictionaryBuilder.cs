@@ -6,7 +6,7 @@ using Wordschatz.Domain.Models.ValueObjects;
 
 namespace Wordschatz.Domain.Models.Dictionaries
 {
-    public class DictionaryBuilder : IDictionaryBuilder
+    public class DictionaryBuilder
     {
         public long Id { get; private set; }
         public Name Name { get; private set; }
@@ -29,13 +29,13 @@ namespace Wordschatz.Domain.Models.Dictionaries
             Marks = new List<Mark>();
         }
 
-        public IDictionaryBuilder SetId(long id)
+        public DictionaryBuilder SetId(long id)
         {
             this.Id = id;
             return this;
         }
 
-        public IDictionaryBuilder AddMark(Mark mark)
+        public DictionaryBuilder AddMark(Mark mark)
         {
             if (mark == null)
                 throw new ArgumentException("The mark cannot be null.");
@@ -44,7 +44,7 @@ namespace Wordschatz.Domain.Models.Dictionaries
             return this;
         }
 
-        public IDictionaryBuilder AddTheme(Theme theme)
+        public DictionaryBuilder AddTheme(Theme theme)
         {
             if (theme == null)
                 throw new ArgumentException("The theme cannot be null.");
@@ -53,31 +53,31 @@ namespace Wordschatz.Domain.Models.Dictionaries
             return this;
         }
 
-        public IDictionaryBuilder SetDescription(string description)
+        public DictionaryBuilder SetDescription(string description)
         {
             Description = new Description(description);
             return this;
         }
 
-        public IDictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel)
+        public DictionaryBuilder SetEditPermissionLevel(EditPermission permissionLevel)
         {
             EditPermission = permissionLevel;
             return this;
         }
 
-        public IDictionaryBuilder SetName(string name)
+        public DictionaryBuilder SetName(string name)
         {
             Name = new Name(name);
             return this;
         }
 
-        public IDictionaryBuilder SetVisibility(Visibility visibility)
+        public DictionaryBuilder SetVisibility(Visibility visibility)
         {
             Visibility = visibility;
             return this;
         }
 
-        public IDictionaryBuilder SetPassword(string password)
+        public DictionaryBuilder SetPassword(string password)
         {
             if (string.IsNullOrEmpty(password) && Visibility != Visibility.PasswordProtected)
                 return this;
